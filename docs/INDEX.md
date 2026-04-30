@@ -2,6 +2,10 @@
 
 > Indice maestro de toda la documentacion tecnica del proyecto.
 
+## Roadmap
+
+- [Roadmap M0-M8](roadmap.md) — Hitos desde scaffold hasta produccion
+
 ## Arquitectura
 
 - [Estructura de carpetas](architecture/folder-structure.md) — Layout del proyecto Next.js App Router
@@ -17,6 +21,10 @@
 
 - [Contacto privado](privacy/contact-form.md) — Arquitectura del formulario de contacto sin exponer email
 - [Redes sociales](privacy/social-links.md) — Links sociales con maxima privacidad
+
+## Spec-Kit (SDD)
+
+- [Uso de spec-kit](speckit/usage.md) — Comandos, flujo de trabajo, estructura de archivos
 
 ## Deploy
 

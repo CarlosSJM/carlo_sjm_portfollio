@@ -60,8 +60,28 @@
 }
 ```
 
+## Testing: Vitest + Playwright
+
+**Por que Vitest y no Jest:**
+- Soporte nativo de ESM y TypeScript (sin transforms extra)
+- Reutiliza Vite module graph: watch mode instantaneo
+- Misma API que Jest (describe, it, expect) — zero curva de aprendizaje
+- Compatible con Next.js 16 sin configuracion adicional
+
+**Por que Playwright y no Cypress:**
+- Multi-browser (Chromium, Firefox, WebKit)
+- Mas rapido en headless
+- Soporte oficial desde la documentacion de Next.js
+- Ligero en CI/CD
+
+**Cobertura de tests:**
+- Vitest: metadata SEO, JSON-LD schemas, validacion contact form, datos de src/data/
+- Playwright: renderizado de paginas, navegacion, accesibilidad, formulario e2e
+
 ## Pendientes de instalar
 
 - `resend` — cuando se implemente el formulario de contacto
+- `vitest` — unit/integration testing
+- `@playwright/test` — e2e testing
 
 Principio: dependencias minimas. No instalar nada que Next.js ya provea.

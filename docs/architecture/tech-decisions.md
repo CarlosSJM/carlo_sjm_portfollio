@@ -48,14 +48,21 @@
     "react-dom": "19.2.4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "@tailwindcss/postcss": "^4",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^6.0.1",
     "eslint": "^9",
     "eslint-config-next": "16.2.2",
+    "jsdom": "^29.1.1",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.5"
   }
 }
 ```
@@ -78,10 +85,19 @@
 - Vitest: metadata SEO, JSON-LD schemas, validacion contact form, datos de src/data/
 - Playwright: renderizado de paginas, navegacion, accesibilidad, formulario e2e
 
+## Configuracion adicional
+
+- **TypeScript strict**: `strict: true`, `noUncheckedIndexedAccess: true`, `noImplicitOverride: true`
+- **ESLint**: reglas de Constitution IV — `no-explicit-any: error`, `consistent-type-assertions`, `no-non-null-assertion`
+- **Security headers** (`next.config.ts`):
+  - `Referrer-Policy: strict-origin-when-cross-origin`
+  - `X-Content-Type-Options: nosniff`
+  - `X-Frame-Options: DENY`
+  - `Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()`
+  - `Strict-Transport-Security: max-age=63072000; includeSubDomains; preload`
+
 ## Pendientes de instalar
 
-- `resend` — cuando se implemente el formulario de contacto
-- `vitest` — unit/integration testing
-- `@playwright/test` — e2e testing
+- `resend` — cuando se implemente el formulario de contacto (M4)
 
 Principio: dependencias minimas. No instalar nada que Next.js ya provea.

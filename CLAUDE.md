@@ -14,8 +14,9 @@ Portfolio personal para mostrar habilidades como desarrollador fullstack.
 ## Stack
 
 - **Framework**: Next.js 16.2.2 (App Router, Turbopack, SSG)
-- **Language**: TypeScript
+- **Language**: TypeScript (strict + noUncheckedIndexedAccess + noImplicitOverride)
 - **Styling**: Tailwind CSS v4
+- **Testing**: Vitest (unit/integration) + Playwright (e2e)
 - **Email**: Resend API (formulario de contacto)
 - **Deploy**: Vercel
 - **Analytics**: @vercel/analytics + @vercel/speed-insights
@@ -27,7 +28,10 @@ npm run dev          # Dev server (Turbopack)
 npm run build        # Build de produccion
 npm run start        # Servir build local
 npm run lint         # ESLint
-npx tsc --noEmit     # Typecheck
+npm run typecheck    # tsc --noEmit
+npm run test         # Vitest (run once)
+npm run test:watch   # Vitest (watch mode)
+npm run test:e2e     # Playwright (build + start + test)
 ```
 
 ## Arquitectura

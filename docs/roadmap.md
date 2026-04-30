@@ -5,7 +5,7 @@
 
 ## Estado actual
 
-**M0 completado parcialmente. Esperando contenido y diseños del usuario para avanzar a M2.**
+**M0 y M1 completados. Esperando contenido y diseños del usuario para avanzar a M2.**
 
 ---
 
@@ -29,16 +29,16 @@
 
 **Objetivo**: Tooling de calidad y testing operativo antes de escribir features.
 
-- [ ] Instalar Vitest + scripts (`npm run test`, `npm run test:watch`)
-- [ ] Instalar Playwright + scripts (`npm run test:e2e`)
-- [ ] Config ESLint con reglas de constitution (`no-explicit-any`, etc.)
-- [ ] `tsconfig.json` con `strict: true` verificado
-- [ ] `next.config.ts` con security headers (`Referrer-Policy`, `X-Content-Type-Options`, `X-Frame-Options`)
-- [ ] Crear directorios base: `src/types/`, `src/lib/`, `src/data/`, `tests/{unit,integration,e2e}/`
-- [ ] `vercel link` + configurar env vars (`RESEND_API_KEY`, `CONTACT_EMAIL`)
-- [ ] Test "smoke" inicial en Vitest y Playwright (verifica que el setup funciona)
+- [x] Instalar Vitest + scripts (`npm run test`, `npm run test:watch`)
+- [x] Instalar Playwright + scripts (`npm run test:e2e`)
+- [x] Config ESLint con reglas de constitution (`no-explicit-any`, etc.)
+- [x] `tsconfig.json` con `strict: true` + `noUncheckedIndexedAccess` + `noImplicitOverride`
+- [x] `next.config.ts` con security headers (Referrer-Policy, X-Content-Type-Options, X-Frame-Options, Permissions-Policy, HSTS)
+- [x] Crear directorios base: `src/types/`, `src/lib/`, `src/data/`, `tests/{unit,integration,e2e}/`
+- [ ] `vercel link` + configurar env vars (`RESEND_API_KEY`, `CONTACT_EMAIL`) — movido a M6
+- [x] Test "smoke" inicial en Vitest y Playwright (verifica que el setup funciona)
 
-**Criterio de salida**: `npm run lint && npx tsc --noEmit && npm run test && npm run test:e2e` pasa.
+**Criterio de salida**: `npm run lint && npm run typecheck && npm run test && npm run test:e2e` pasa. ✅
 
 ---
 

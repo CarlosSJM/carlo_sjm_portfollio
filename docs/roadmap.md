@@ -5,7 +5,7 @@
 
 ## Estado actual
 
-**M0 y M1 completados. Esperando contenido y diseños del usuario para avanzar a M2.**
+**M0, M1 y M2 completados. Listo para arrancar M3 (implementacion del UI con spec-kit).**
 
 ---
 
@@ -46,17 +46,16 @@
 
 **Objetivo**: Tener todo el material necesario para construir el portfolio.
 
-> **BLOQUEANTE**: requiere input del usuario. Sin esto no se puede avanzar a M3.
+- [x] Mockups/diseños del portfolio (Figma Make export, dark mode)
+- [x] Lista de tecnologias dominadas (6 categorias, ver content-brief.md)
+- [x] Lista de proyectos a destacar (3 proyectos, ver content-brief.md)
+- [x] Texto de bio/about (3 parrafos en EN)
+- [ ] LinkedIn/GitHub URLs reales (tarea futura #23, no bloqueante — placeholders en M3)
+- [x] Secciones definidas (8 secciones + footer, ver content-brief.md)
+- [ ] Subdominio Vercel definitivo (TBD, M6/M7)
+- [x] Brief de contenido en `docs/content-brief.md`
 
-- [ ] Mockups/diseños del portfolio (dark mode como default)
-- [ ] Lista de tecnologias dominadas
-- [ ] Lista de proyectos a destacar (titulo, descripcion, stack, links)
-- [ ] Texto de bio/about
-- [ ] Links sociales finales (GitHub, LinkedIn, etc.)
-- [ ] Definir secciones segun los diseños (Hero, About, Skills, Projects, Contact, etc.)
-- [ ] Decidir el subdominio Vercel (`nombrequepongamos.vercel.app`)
-
-**Criterio de salida**: documento o brief con todo el contenido listo para `/speckit-specify`.
+**Criterio de salida**: ✅ `docs/content-brief.md` consolidado y listo para `/speckit-specify`.
 
 ---
 

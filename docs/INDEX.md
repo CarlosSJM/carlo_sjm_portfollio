@@ -5,6 +5,7 @@
 ## Roadmap
 
 - [Roadmap M0-M8](roadmap.md) — Hitos desde scaffold hasta produccion
+- [Content Brief](content-brief.md) — Contenido y decisiones M2 (input para M3)
 
 ## Arquitectura
 

@@ -41,17 +41,19 @@ carlo_sjm_portfollio/
 │   │   └── ui/                    # Componentes base reutilizables
 │   │
 │   ├── lib/                       # Logica compartida
-│   │   ├── metadata.ts            # Helpers para generateMetadata
-│   │   ├── schema.ts              # JSON-LD (Person, WebSite, ProfilePage)
-│   │   └── resend.ts              # Cliente de Resend para emails
+│   │   ├── site.ts                # Constante SITE (name, url, defaults) [001-layout-header]
+│   │   ├── metadata.ts            # Helpers para generateMetadata (TODO 001-layout-header)
+│   │   ├── schema.ts              # JSON-LD (Person, WebSite) (TODO 001-layout-header)
+│   │   └── resend.ts              # Cliente de Resend para emails (TODO M4)
 │   │
 │   ├── data/                      # Contenido editable centralizado
-│   │   ├── projects.ts            # Datos de proyectos
-│   │   ├── skills.ts              # Stack tecnologico
-│   │   └── social.ts              # Links de redes sociales
+│   │   ├── navigation.ts          # NAV_LINKS (anchor nav) [001-layout-header]
+│   │   ├── projects.ts            # Datos de proyectos (TODO M3)
+│   │   ├── skills.ts              # Stack tecnologico (TODO M3)
+│   │   └── social.ts              # Links de redes sociales (TODO M3)
 │   │
 │   ├── types/                     # Tipos TypeScript compartidos
-│   │   └── index.ts
+│   │   └── index.ts               # NavLink, SiteConfig, PersonSchemaData [001-layout-header]
 │   │
 │   └── styles/
 │       └── globals.css            # Tailwind base + custom styles

@@ -32,9 +32,9 @@ description: "Task list for implementing 001-layout-header"
 
 **Purpose**: Project structure and shared types for this feature
 
-- [ ] T001 [P] Define types `NavLink`, `SiteConfig`, `PersonSchemaData` in `src/types/index.ts`
-- [ ] T002 [P] Create `SITE` constant in `src/lib/site.ts` (uses `process.env.NEXT_PUBLIC_SITE_URL`)
-- [ ] T003 [P] Create `NAV_LINKS` data in `src/data/navigation.ts`
+- [x] T001 [P] Define types `NavLink`, `SiteConfig`, `PersonSchemaData` in `src/types/index.ts`
+- [x] T002 [P] Create `SITE` constant in `src/lib/site.ts` (uses `process.env.NEXT_PUBLIC_SITE_URL`)
+- [x] T003 [P] Create `NAV_LINKS` data in `src/data/navigation.ts`
 
 ---
 

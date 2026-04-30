@@ -62,15 +62,19 @@ Nunca commitear `.env.local`. Configurar en Vercel Dashboard.
 
 ## Documentacion viva
 
-**Regla obligatoria**: cada vez que se haga un commit o se tome una decision tecnica, actualizar toda la documentacion implicada en `/docs/`. Esto incluye:
-- Nuevas rutas o componentes -> actualizar `docs/architecture/folder-structure.md` y `docs/architecture/components.md`
-- Cambios de dependencias o stack -> actualizar `docs/architecture/tech-decisions.md`
-- Cambios de SEO -> actualizar `docs/seo/strategy.md` y `docs/seo/checklist.md`
-- Cambios de privacidad -> actualizar `docs/privacy/`
-- Cambios de deploy/env vars -> actualizar `docs/deploy/vercel.md`
-- Si se agrega un doc nuevo -> actualizar `docs/INDEX.md`
+**Regla obligatoria**: tras completar **cualquier task individual de spec-kit, cualquier phase, cualquier commit, o cualquier decision tecnica**, hacer un pase de revision documental antes de avanzar. Actualizar todo lo implicado:
 
-La documentacion debe reflejar siempre el estado actual del proyecto.
+- Nuevas rutas o componentes -> `docs/architecture/folder-structure.md` y `docs/architecture/components.md`
+- Cambios de dependencias o stack -> `docs/architecture/tech-decisions.md`
+- Cambios de SEO -> `docs/seo/strategy.md` y `docs/seo/checklist.md`
+- Cambios de privacidad -> `docs/privacy/`
+- Cambios de testing -> `docs/testing/strategy.md`
+- Cambios de deploy/env vars -> `docs/deploy/vercel.md`
+- Avance en el roadmap -> marcar items en `docs/roadmap.md`
+- Tasks completadas en spec-kit -> marcar checkboxes en `specs/<feature>/tasks.md`
+- Si se agrega un doc nuevo -> `docs/INDEX.md`
+
+La documentacion debe reflejar siempre el estado actual del proyecto. Si tras la revision no hay nada que actualizar, declararlo explicitamente.
 
 ## SEO Checklist
 

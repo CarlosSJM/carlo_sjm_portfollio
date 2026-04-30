@@ -44,9 +44,9 @@ description: "Task list for implementing 001-layout-header"
 
 **CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T004 Configure `next/font/google` for Space Grotesk, JetBrains Mono, Inter inside `src/app/layout.tsx` and expose CSS variables on `<html>`
-- [ ] T005 Update `src/app/globals.css` with Tailwind v4 `@theme inline` design tokens (colors, font variables) and base styles (cursor crosshair rules, scroll-margin-top, scroll-behavior smooth with reduced-motion fallback)
-- [ ] T006 Verify `next.config.ts` security headers are active (already configured in M1; just smoke-test)
+- [x] T004 Configure `next/font/google` for Space Grotesk, JetBrains Mono, Inter inside `src/app/layout.tsx` and expose CSS variables on `<html>`
+- [x] T005 Update `src/app/globals.css` with Tailwind v4 `@theme inline` design tokens (colors, font variables) and base styles (cursor crosshair rules, scroll-margin-top, scroll-behavior smooth with reduced-motion fallback)
+- [x] T006 Verify `next.config.ts` security headers are active (already configured in M1; just smoke-test)
 
 **Constitution Gate**: Run before proceeding:
 - `npm run typecheck` — zero errors

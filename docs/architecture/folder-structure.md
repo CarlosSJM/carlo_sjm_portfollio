@@ -29,9 +29,9 @@ carlo_sjm_portfollio/
 │   │   ├── projects/page.tsx      # Pagina de proyectos
 │   │   ├── about/page.tsx         # Sobre mi
 │   │   ├── contact/page.tsx       # Formulario de contacto
-│   │   ├── api/contact/route.ts   # Serverless: envio de emails via Resend
-│   │   ├── sitemap.ts             # Generacion automatica de sitemap
-│   │   ├── robots.ts              # Configuracion de robots.txt
+│   │   ├── api/contact/route.ts   # Serverless: envio de emails via Resend (TODO M4)
+│   │   ├── sitemap.ts             # Generacion automatica de sitemap [001]
+│   │   ├── robots.ts              # Configuracion de robots.txt [001]
 │   │   └── not-found.tsx          # Pagina 404 personalizada
 │   │
 │   ├── components/

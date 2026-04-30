@@ -92,14 +92,14 @@ description: "Task list for implementing 001-layout-header"
 
 ### Tests for User Story 2
 
-- [ ] T019 [P] [US2] Vitest: `tests/unit/navigation.test.ts` — every `NAV_LINKS` entry has `label` (non-empty) and `href` starting with `#`
-- [ ] T020 [P] [US2] Playwright: `tests/e2e/navigation.spec.ts` — click each nav link, assert URL hash matches expected (`#about`, `#skills`, etc.); navigate to `/#projects` directly and assert no console errors
+- [x] T019 [P] [US2] Vitest: `tests/unit/navigation.test.ts` — every `NAV_LINKS` entry has `label` (non-empty) and `href` starting with `#`
+- [x] T020 [P] [US2] Playwright: `tests/e2e/navigation.spec.ts` — click each nav link, assert URL hash matches expected (`#about`, `#skills`, etc.); navigate to `/#projects` directly and assert no console errors
 
 ### Implementation for User Story 2
 
 - [x] T021 [US2] Implement `<Header>` Server Component in `src/components/layout/Header.tsx` with `position: sticky`, `aria-label="Main"` nav, render `NAV_LINKS` as `<a href="#...">` items, optional logo/name link to `/` (adelantado durante US1 por dependencia tecnica con T017)
-- [ ] T022 [US2] Stub `src/app/sitemap.ts` returning the homepage URL (full sitemap in M4)
-- [ ] T023 [US2] Stub `src/app/robots.ts` allowing all and pointing to sitemap (full robots in M4)
+- [x] T022 [US2] Stub `src/app/sitemap.ts` returning the homepage URL (full sitemap in M4)
+- [x] T023 [US2] Stub `src/app/robots.ts` allowing all and pointing to sitemap (full robots in M4)
 
 **Checkpoint**: User Stories 1 AND 2 both work independently.
 

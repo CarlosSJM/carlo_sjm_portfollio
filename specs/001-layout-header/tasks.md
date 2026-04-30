@@ -64,21 +64,21 @@ description: "Task list for implementing 001-layout-header"
 
 ### Tests for User Story 1 (write FIRST, ensure they FAIL before implementation)
 
-- [ ] T007 [P] [US1] Vitest: `tests/unit/site.test.ts` — `SITE` constant has all required fields; `defaultTitle` 50-60 chars; `defaultDescription` 150-160 chars; `url` is valid URL
-- [ ] T008 [P] [US1] Vitest: `tests/unit/metadata.test.ts` — `buildMetadata()` returns title, description, canonical, openGraph (with image 1200x630), twitter card with valid values; supports overrides
-- [ ] T009 [P] [US1] Vitest: `tests/unit/schema.test.ts` — `buildPersonSchema()` returns `@context`, `@type: Person`, name, jobTitle, url, sameAs[], knowsAbout[]; `buildWebSiteSchema()` returns `@context`, `@type: WebSite`, name, url
-- [ ] T010 [P] [US1] Playwright: `tests/e2e/layout.spec.ts` — landmarks (`<header>`, `<nav aria-label="Main">`, `<main id="main">`, `<footer>`) present; `<html lang="en">`; title and description meta tags present; footer text matches expected
-- [ ] T011 [P] [US1] Playwright: `tests/e2e/privacy.spec.ts` — load `/` and assert zero requests go to googleapis.com, gstatic.com, cdnjs, unpkg, jsdelivr (network audit)
+- [x] T007 [P] [US1] Vitest: `tests/unit/site.test.ts` — `SITE` constant has all required fields; `defaultTitle` 50-60 chars; `defaultDescription` 150-160 chars; `url` is valid URL
+- [x] T008 [P] [US1] Vitest: `tests/unit/metadata.test.ts` — `buildMetadata()` returns title, description, canonical, openGraph (with image 1200x630), twitter card with valid values; supports overrides
+- [x] T009 [P] [US1] Vitest: `tests/unit/schema.test.ts` — `buildPersonSchema()` returns `@context`, `@type: Person`, name, jobTitle, url, sameAs[], knowsAbout[]; `buildWebSiteSchema()` returns `@context`, `@type: WebSite`, name, url
+- [x] T010 [P] [US1] Playwright: `tests/e2e/layout.spec.ts` — landmarks (`<header>`, `<nav aria-label="Main">`, `<main id="main">`, `<footer>`) present; `<html lang="en">`; title and description meta tags present; footer text matches expected
+- [x] T011 [P] [US1] Playwright: `tests/e2e/privacy.spec.ts` — load `/` and assert zero requests go to googleapis.com, gstatic.com, cdnjs, unpkg, jsdelivr (network audit)
 
 ### Implementation for User Story 1
 
-- [ ] T012 [P] [US1] Implement `buildMetadata(overrides?)` in `src/lib/metadata.ts` per contracts/components.md
-- [ ] T013 [P] [US1] Implement `buildPersonSchema()` and `buildWebSiteSchema()` in `src/lib/schema.ts` per contracts/components.md
-- [ ] T014 [P] [US1] Implement `<Footer>` Server Component in `src/components/layout/Footer.tsx` with `currentYear = new Date().getFullYear()`, copyright + tagline
-- [ ] T015 [P] [US1] Implement `<SkipToContent>` Server Component in `src/components/layout/SkipToContent.tsx` with `sr-only`/`focus:not-sr-only` styles
-- [ ] T016 [P] [US1] Implement `<FilmGrain>` Server Component in `src/components/layout/FilmGrain.tsx` with inline SVG `feTurbulence` and `aria-hidden="true"`
-- [ ] T017 [US1] Update `src/app/layout.tsx`: apply font CSS variables to `<html>`, set `lang="en"`, export `metadata` from `buildMetadata()`, render `<head>` JSON-LD scripts (Person + WebSite), wrap children in `<SkipToContent /> <FilmGrain /> <Header /> <main id="main">{children}</main> <Footer />`
-- [ ] T018 [US1] Replace default `src/app/page.tsx` with placeholder that includes `<section id="about">`, `<section id="skills">`, ... `<section id="contact">` empty sections so anchor navigation tests pass (real content lands in subsequent features)
+- [x] T012 [P] [US1] Implement `buildMetadata(overrides?)` in `src/lib/metadata.ts` per contracts/components.md
+- [x] T013 [P] [US1] Implement `buildPersonSchema()` and `buildWebSiteSchema()` in `src/lib/schema.ts` per contracts/components.md
+- [x] T014 [P] [US1] Implement `<Footer>` Server Component in `src/components/layout/Footer.tsx` with `currentYear = new Date().getFullYear()`, copyright + tagline
+- [x] T015 [P] [US1] Implement `<SkipToContent>` Server Component in `src/components/layout/SkipToContent.tsx` with `sr-only`/`focus:not-sr-only` styles
+- [x] T016 [P] [US1] Implement `<FilmGrain>` Server Component in `src/components/layout/FilmGrain.tsx` with inline SVG `feTurbulence` and `aria-hidden="true"`
+- [x] T017 [US1] Update `src/app/layout.tsx`: apply font CSS variables to `<html>`, set `lang="en"`, export `metadata` from `buildMetadata()`, render `<head>` JSON-LD scripts (Person + WebSite), wrap children in `<SkipToContent /> <FilmGrain /> <Header /> <main id="main">{children}</main> <Footer />`
+- [x] T018 [US1] Replace default `src/app/page.tsx` with placeholder that includes `<section id="about">`, `<section id="skills">`, ... `<section id="contact">` empty sections so anchor navigation tests pass (real content lands in subsequent features)
 
 **Checkpoint**: User Story 1 fully functional, tested, accessible. Lighthouse on `/` >= 95/95/90.
 
@@ -97,7 +97,7 @@ description: "Task list for implementing 001-layout-header"
 
 ### Implementation for User Story 2
 
-- [ ] T021 [US2] Implement `<Header>` Server Component in `src/components/layout/Header.tsx` with `position: sticky`, `aria-label="Main"` nav, render `NAV_LINKS` as `<a href="#...">` items, optional logo/name link to `/`
+- [x] T021 [US2] Implement `<Header>` Server Component in `src/components/layout/Header.tsx` with `position: sticky`, `aria-label="Main"` nav, render `NAV_LINKS` as `<a href="#...">` items, optional logo/name link to `/` (adelantado durante US1 por dependencia tecnica con T017)
 - [ ] T022 [US2] Stub `src/app/sitemap.ts` returning the homepage URL (full sitemap in M4)
 - [ ] T023 [US2] Stub `src/app/robots.ts` allowing all and pointing to sitemap (full robots in M4)
 

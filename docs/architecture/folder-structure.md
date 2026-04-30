@@ -35,15 +35,19 @@ carlo_sjm_portfollio/
 │   │   └── not-found.tsx          # Pagina 404 personalizada
 │   │
 │   ├── components/
-│   │   ├── layout/                # Header, Footer, Navigation
-│   │   ├── sections/              # Hero, ProjectCard, Skills, etc.
-│   │   ├── contact/               # ContactForm, SocialLinks
-│   │   └── ui/                    # Componentes base reutilizables
+│   │   ├── layout/                # Header, Footer, SkipToContent, FilmGrain [001-layout-header]
+│   │   │   ├── Header.tsx         # Sticky nav con NAV_LINKS [001]
+│   │   │   ├── Footer.tsx         # Copyright + tagline [001]
+│   │   │   ├── SkipToContent.tsx  # A11y skip link [001]
+│   │   │   └── FilmGrain.tsx      # Overlay SVG inline [001]
+│   │   ├── sections/              # Hero, ProjectCard, Skills, etc. (TODO M3)
+│   │   ├── contact/               # ContactForm, SocialLinks (TODO M3/M4)
+│   │   └── ui/                    # Componentes base reutilizables (TODO M3)
 │   │
 │   ├── lib/                       # Logica compartida
-│   │   ├── site.ts                # Constante SITE (name, url, defaults) [001-layout-header]
-│   │   ├── metadata.ts            # Helpers para generateMetadata (TODO 001-layout-header)
-│   │   ├── schema.ts              # JSON-LD (Person, WebSite) (TODO 001-layout-header)
+│   │   ├── site.ts                # Constante SITE [001]
+│   │   ├── metadata.ts            # buildMetadata() helper [001]
+│   │   ├── schema.ts              # buildPersonSchema, buildWebSiteSchema [001]
 │   │   └── resend.ts              # Cliente de Resend para emails (TODO M4)
 │   │
 │   ├── data/                      # Contenido editable centralizado

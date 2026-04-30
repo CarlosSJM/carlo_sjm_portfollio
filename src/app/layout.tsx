@@ -1,5 +1,10 @@
-import type { Metadata } from "next";
 import { Space_Grotesk, JetBrains_Mono, Inter } from "next/font/google";
+import { buildMetadata } from "@/lib/metadata";
+import { buildPersonSchema, buildWebSiteSchema } from "@/lib/schema";
+import { FilmGrain } from "@/components/layout/FilmGrain";
+import { Footer } from "@/components/layout/Footer";
+import { Header } from "@/components/layout/Header";
+import { SkipToContent } from "@/components/layout/SkipToContent";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -23,23 +28,40 @@ const inter = Inter({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Carlos San Juan Martin — Full Stack Developer in Madrid",
-  description:
-    "Full Stack Developer with a biology background. Building scalable web apps with Next.js, TypeScript, NestJS, and modern infrastructure. Based in Madrid.",
-};
+export const metadata = buildMetadata();
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>): React.JSX.Element {
+  const personSchema = buildPersonSchema();
+  const webSiteSchema = buildWebSiteSchema();
+
   return (
     <html
       lang="en"
       className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-body">{children}</body>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
+        />
+      </head>
+      <body className="min-h-full flex flex-col font-body bg-black text-white">
+        <SkipToContent />
+        <FilmGrain />
+        <Header />
+        <main id="main" className="flex-1">
+          {children}
+        </main>
+        <Footer />
+      </body>
     </html>
   );
 }

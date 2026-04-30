@@ -22,6 +22,10 @@
 - [Contacto privado](privacy/contact-form.md) — Arquitectura del formulario de contacto sin exponer email
 - [Redes sociales](privacy/social-links.md) — Links sociales con maxima privacidad
 
+## Testing
+
+- [Estrategia de testing](testing/strategy.md) — Vitest + Playwright, que testear con que, convenciones
+
 ## Spec-Kit (SDD)
 
 - [Uso de spec-kit](speckit/usage.md) — Comandos, flujo de trabajo, estructura de archivos

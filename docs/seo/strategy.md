@@ -63,6 +63,12 @@ Usar `next/og` (ImageResponse) para generar imagenes dinamicas por pagina.
 - `app/robots.ts`: Allow all, apuntar a sitemap URL
 - Enviar sitemap a Google Search Console post-deploy
 
+### Estado actual
+
+- ✅ `app/sitemap.ts` — stub con homepage (`/`) [feature 001-layout-header]
+- ✅ `app/robots.ts` — `User-agent: *`, `Allow: /`, sitemap URL [feature 001-layout-header]
+- TODO M4: enriquecer sitemap con secciones/anchors si se decide indexarlas separadas, lastModified dinamico
+
 ## Semantic HTML
 
 - Un `<h1>` por pagina

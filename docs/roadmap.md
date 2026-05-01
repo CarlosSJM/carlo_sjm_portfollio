@@ -5,7 +5,7 @@
 
 ## Estado actual
 
-**M0, M1 y M2 completados. Listo para arrancar M3 (implementacion del UI con spec-kit).**
+**M0, M1, M2 completados. M3 en curso — feature `001-layout-header` cerrado. Pendiente: features de cada seccion (Hero, About, Skills, Experience, Projects, Education, Game of Life, Contact).**
 
 ---
 

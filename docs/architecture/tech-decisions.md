@@ -23,6 +23,28 @@
 - Utility-first: rapido para prototipar y mantener
 - Soporte nativo en Next.js
 
+### Design tokens (Tailwind v4 `@theme inline`)
+
+Definidos en `src/app/globals.css`:
+
+| Token | Valor | Uso |
+|---|---|---|
+| `--color-background` | `#000` | Body, secciones primarias |
+| `--color-foreground` | `#fff` | Texto principal |
+| `--color-muted` | `#a0a0a0` | Texto secundario |
+| `--color-surface-1/2/3` | `#0a0a0a / #0d0d0d / #1a1a1a` | Backgrounds alternados de seccion |
+| `--color-border-subtle/medium/strong` | `rgb(255 255 255 / 0.1/0.2/0.3)` | Bordes |
+| `--font-display` | Space Grotesk (700) | Headings |
+| `--font-mono` | JetBrains Mono (300/400/500) | Eyebrows, dates, code |
+| `--font-body` | Inter (300/400/500/600) | Bio, descripciones |
+
+## Fonts: next/font/google
+
+- Self-hosted en build time → cero requests a `fonts.googleapis.com`
+- `display: swap` → cero CLS
+- Aplicadas via CSS variables en `<html>` y mapeadas en `@theme`
+- Variables inyectadas: `--font-display`, `--font-mono`, `--font-body`
+
 ## Emails: Resend API
 
 - Free tier: 100 emails/dia, 3000/mes (sobra para portfolio)

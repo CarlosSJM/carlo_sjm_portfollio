@@ -29,29 +29,35 @@ carlo_sjm_portfollio/
 │   │   ├── projects/page.tsx      # Pagina de proyectos
 │   │   ├── about/page.tsx         # Sobre mi
 │   │   ├── contact/page.tsx       # Formulario de contacto
-│   │   ├── api/contact/route.ts   # Serverless: envio de emails via Resend
-│   │   ├── sitemap.ts             # Generacion automatica de sitemap
-│   │   ├── robots.ts              # Configuracion de robots.txt
+│   │   ├── api/contact/route.ts   # Serverless: envio de emails via Resend (TODO M4)
+│   │   ├── sitemap.ts             # Generacion automatica de sitemap [001]
+│   │   ├── robots.ts              # Configuracion de robots.txt [001]
 │   │   └── not-found.tsx          # Pagina 404 personalizada
 │   │
 │   ├── components/
-│   │   ├── layout/                # Header, Footer, Navigation
-│   │   ├── sections/              # Hero, ProjectCard, Skills, etc.
-│   │   ├── contact/               # ContactForm, SocialLinks
-│   │   └── ui/                    # Componentes base reutilizables
+│   │   ├── layout/                # Header, Footer, SkipToContent, FilmGrain [001-layout-header]
+│   │   │   ├── Header.tsx         # Sticky nav con NAV_LINKS [001]
+│   │   │   ├── Footer.tsx         # Copyright + tagline [001]
+│   │   │   ├── SkipToContent.tsx  # A11y skip link [001]
+│   │   │   └── FilmGrain.tsx      # Overlay SVG inline [001]
+│   │   ├── sections/              # Hero, ProjectCard, Skills, etc. (TODO M3)
+│   │   ├── contact/               # ContactForm, SocialLinks (TODO M3/M4)
+│   │   └── ui/                    # Componentes base reutilizables (TODO M3)
 │   │
 │   ├── lib/                       # Logica compartida
-│   │   ├── metadata.ts            # Helpers para generateMetadata
-│   │   ├── schema.ts              # JSON-LD (Person, WebSite, ProfilePage)
-│   │   └── resend.ts              # Cliente de Resend para emails
+│   │   ├── site.ts                # Constante SITE [001]
+│   │   ├── metadata.ts            # buildMetadata() helper [001]
+│   │   ├── schema.ts              # buildPersonSchema, buildWebSiteSchema [001]
+│   │   └── resend.ts              # Cliente de Resend para emails (TODO M4)
 │   │
 │   ├── data/                      # Contenido editable centralizado
-│   │   ├── projects.ts            # Datos de proyectos
-│   │   ├── skills.ts              # Stack tecnologico
-│   │   └── social.ts              # Links de redes sociales
+│   │   ├── navigation.ts          # NAV_LINKS (anchor nav) [001-layout-header]
+│   │   ├── projects.ts            # Datos de proyectos (TODO M3)
+│   │   ├── skills.ts              # Stack tecnologico (TODO M3)
+│   │   └── social.ts              # Links de redes sociales (TODO M3)
 │   │
 │   ├── types/                     # Tipos TypeScript compartidos
-│   │   └── index.ts
+│   │   └── index.ts               # NavLink, SiteConfig, PersonSchemaData [001-layout-header]
 │   │
 │   └── styles/
 │       └── globals.css            # Tailwind base + custom styles

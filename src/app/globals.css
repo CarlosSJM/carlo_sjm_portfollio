@@ -53,8 +53,19 @@ section[id] {
   transform-origin: center;
 }
 
+@keyframes slow-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-slow-rotate {
+  animation: slow-rotate 200s linear infinite;
+  transform-origin: center;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .animate-slow-spin {
+  .animate-slow-spin,
+  .animate-slow-rotate {
     animation: none;
   }
 }

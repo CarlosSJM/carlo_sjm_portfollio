@@ -1,4 +1,4 @@
-import { SITE } from "@/lib/site";
+import { HeroSection } from "@/components/sections/HeroSection";
 
 const PLACEHOLDER_SECTIONS = [
   "about",
@@ -13,22 +13,7 @@ const PLACEHOLDER_SECTIONS = [
 export default function HomePage(): React.JSX.Element {
   return (
     <>
-      <section
-        id="hero"
-        className="relative min-h-screen flex items-center justify-center px-6"
-      >
-        <div className="max-w-5xl mx-auto text-center">
-          <h1 className="font-display font-bold text-5xl md:text-7xl tracking-[0.15em] mb-6">
-            {SITE.name.toUpperCase()}
-          </h1>
-          <p className="font-mono text-sm tracking-[0.2em] text-white/60 mb-2">
-            {SITE.role.toUpperCase()}
-          </p>
-          <p className="font-body text-lg text-white/60 tracking-wide">
-            {SITE.tagline}
-          </p>
-        </div>
-      </section>
+      <HeroSection />
 
       {PLACEHOLDER_SECTIONS.map((id) => (
         <section

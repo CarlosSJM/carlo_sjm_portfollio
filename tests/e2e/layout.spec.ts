@@ -9,7 +9,7 @@ test.describe("Global layout", () => {
 
   test("page has a title", async ({ page }) => {
     await page.goto("/");
-    await expect(page).toHaveTitle(/Carlos San Juan Martin/);
+    await expect(page).toHaveTitle(/Carlos SJM/);
   });
 
   test("page has a meta description", async ({ page }) => {
@@ -35,7 +35,7 @@ test.describe("Global layout", () => {
   test("footer contains copyright text", async ({ page }) => {
     await page.goto("/");
     const footer = page.locator("footer");
-    await expect(footer).toContainText("CARLOS SAN JUAN MARTIN");
+    await expect(footer).toContainText("CARLOS SJM");
   });
 
   test("Person and WebSite JSON-LD scripts are present", async ({ page }) => {

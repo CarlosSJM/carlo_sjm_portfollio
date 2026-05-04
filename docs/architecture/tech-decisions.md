@@ -60,6 +60,23 @@ Definidos en `src/app/globals.css`:
 - Analytics y Speed Insights incluidos
 - SSL automatico
 
+## Animaciones: motion (Framer Motion v11+)
+
+Instalado en M3 feature `002-hero-section`.
+
+- Nombre del paquete: `motion` (renombrado de `framer-motion` en v11)
+- Uso exclusivo en Client Components (`'use client'`) — `HeroAnimations` y `ScrollChevron`
+- `useReducedMotion()` hook para respetar `prefers-reduced-motion`
+- No se usa en Server Components ni en la capa de datos
+
+## Iconos: lucide-react
+
+Instalado en M3 feature `002-hero-section`.
+
+- Tree-shakeable: importar solo los iconos usados (`MapPin`, `ChevronDown`)
+- Nunca usar barrel imports (`import * from "lucide-react"`)
+- Todos los iconos decorativos llevan `aria-hidden="true"`
+
 ## Dependencias actuales
 
 ```json
@@ -67,7 +84,9 @@ Definidos en `src/app/globals.css`:
   "dependencies": {
     "next": "16.2.2",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "motion": "^11.x",
+    "lucide-react": "^0.x"
   },
   "devDependencies": {
     "@playwright/test": "^1.59.1",

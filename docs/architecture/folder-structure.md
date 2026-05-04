@@ -35,14 +35,20 @@ carlo_sjm_portfollio/
 │   │   └── not-found.tsx          # Pagina 404 personalizada
 │   │
 │   ├── components/
-│   │   ├── layout/                # Header, Footer, SkipToContent, FilmGrain [001-layout-header]
+│   │   ├── layout/                # Header, Footer, SkipToContent, FilmGrain, ScrollChevron
 │   │   │   ├── Header.tsx         # Sticky nav con NAV_LINKS [001]
 │   │   │   ├── Footer.tsx         # Copyright + tagline [001]
 │   │   │   ├── SkipToContent.tsx  # A11y skip link [001]
-│   │   │   └── FilmGrain.tsx      # Overlay SVG inline [001]
-│   │   ├── sections/              # Hero, ProjectCard, Skills, etc. (TODO M3)
+│   │   │   ├── FilmGrain.tsx      # Overlay SVG inline [001]
+│   │   │   └── ScrollChevron.tsx  # Bounce animation, links to #about [002]
+│   │   ├── sections/              # Secciones del portfolio
+│   │   │   └── HeroSection.tsx    # Hero full-viewport [002-hero-section]
 │   │   ├── contact/               # ContactForm, SocialLinks (TODO M3/M4)
-│   │   └── ui/                    # Componentes base reutilizables (TODO M3)
+│   │   └── ui/                    # Componentes base reutilizables
+│   │       ├── HeroAnimations.tsx # Framer Motion entrance wrapper [002]
+│   │       └── geometry/          # SVG geometry Server Components [002]
+│   │           ├── GeometricDots.tsx    # Dot grid pattern [002]
+│   │           └── FibonacciSpiral.tsx  # Golden ratio spiral [002]
 │   │
 │   ├── lib/                       # Logica compartida
 │   │   ├── site.ts                # Constante SITE [001]
@@ -52,6 +58,7 @@ carlo_sjm_portfollio/
 │   │
 │   ├── data/                      # Contenido editable centralizado
 │   │   ├── navigation.ts          # NAV_LINKS (anchor nav) [001-layout-header]
+│   │   ├── hero.ts                # HERO_DATA constant [002-hero-section]
 │   │   ├── projects.ts            # Datos de proyectos (TODO M3)
 │   │   ├── skills.ts              # Stack tecnologico (TODO M3)
 │   │   └── social.ts              # Links de redes sociales (TODO M3)

@@ -14,6 +14,21 @@ export interface SiteConfig {
   readonly ogImagePath: `/${string}`;
 }
 
+export interface CtaLink {
+  readonly label: string;
+  readonly href: `#${string}`;
+}
+
+export interface HeroData {
+  readonly name: string;
+  readonly role: string;
+  readonly tagline: string;
+  readonly location: string;
+  readonly ctaPrimary: CtaLink;
+  readonly ctaSecondary: CtaLink;
+  readonly scrollTarget: `#${string}`;
+}
+
 export interface PersonSchemaData {
   readonly name: string;
   readonly jobTitle: string;

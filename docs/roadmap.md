@@ -5,7 +5,7 @@
 
 ## Estado actual
 
-**M0, M1, M2 completados. M3 en curso — feature `001-layout-header` cerrado. Pendiente: features de cada seccion (Hero, About, Skills, Experience, Projects, Education, Game of Life, Contact).**
+**M0, M1, M2 completados. M3 en curso — `001-layout-header` y `002-hero-section` cerrados. Pendiente: About, Skills, Experience, Projects, Education, Game of Life, Contact.**
 
 ---
 
@@ -66,8 +66,8 @@
 - [ ] `/speckit-specify` para cada feature/seccion
 - [ ] `/speckit-plan` y `/speckit-tasks` por feature
 - [ ] `/speckit-implement` siguiendo el orden:
-  - [ ] Layout base (Header, Footer, Navigation)
-  - [ ] Hero / Landing
+  - [x] Layout base (Header, Footer, Navigation) — `001-layout-header`
+  - [x] Hero / Landing — `002-hero-section`
   - [ ] Skills / Stack tecnologico
   - [ ] Projects / Portfolio grid
   - [ ] About / Sobre mi

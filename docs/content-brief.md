@@ -6,7 +6,7 @@
 
 ## Identidad
 
-- **Nombre**: Carlos San Juan Martin
+- **Nombre**: Carlos SJM
 - **Role**: Full Stack Developer
 - **Tagline**: "From biology to code — building end-to-end digital experiences"
 - **Ubicacion**: Madrid
@@ -41,7 +41,7 @@
 
 | # | ID | Titulo H3 | Eyebrow (H2) |
 |---|---|---|---|
-| 1 | `hero` | "CARLOS SAN JUAN MARTIN" (h1) | — |
+| 1 | `hero` | "CARLOS SJM" (h1) | — |
 | 2 | `about` | "From Nature to Code" | "ABOUT" |
 | 3 | `skills` | "AREAS OF KNOWLEDGE" | "EXPERTISE" |
 | 4 | `experience` | "EXPERIENCE" | "JOURNEY" |
@@ -49,16 +49,16 @@
 | 6 | `education` | "EDUCATION & CERTIFICATIONS" | "LEARNING" |
 | 7 | `gameoflife` | "CONWAY'S GAME OF LIFE" | "INTERACTIVE" |
 | 8 | `contact` | "LET'S BUILD SOMETHING" | — |
-| – | footer | © 2026 CARLOS SAN JUAN MARTIN | — |
+| – | footer | © 2026 CARLOS SJM | — |
 
 ## Contenido detallado
 
 ### 1. Hero
 
-- H1: `CARLOS SAN JUAN MARTIN`
+- H1: `CARLOS SJM`
 - Role: `FULL STACK DEVELOPER`
 - Tagline: `From biology to code — building end-to-end digital experiences`
-- Ubicacion: `Madrid` (con icono `MapPin`)
+- Ubicacion: `Segovia` (con icono `MapPin`)
 - CTAs:
   - `VIEW PROJECTS` → ancla `#projects`
   - `CONTACT ME` → ancla `#contact`
@@ -73,7 +73,7 @@
 >
 > With a background in biology and years of experience across the full stack, I bring a unique analytical perspective to software development. I specialize in creating scalable applications that bridge the gap between complex backend systems and intuitive user experiences.
 >
-> Based in Madrid, I've worked with startups and enterprises across fintech, IoT, and enterprise solutions, always seeking the elegant solution that balances technical excellence with practical delivery.
+> Based in Segovia, I've worked with startups and enterprises across fintech, IoT, and enterprise solutions, always seeking the elegant solution that balances technical excellence with practical delivery.
 
 - Foto: placeholder SVG (Vesica Piscis frame) hasta tener real
 - Background: `SpiralPetals` (opacity 0.2) + grid SVG overlay
@@ -138,7 +138,7 @@
 
 ### Footer
 
-- `© 2026 CARLOS SAN JUAN MARTIN`
+- `© 2026 CARLOS SJM`
 - `DESIGNED WITH PRECISION · BUILT WITH PASSION`
 
 ## Componentes a portar (de la fuente Figma)

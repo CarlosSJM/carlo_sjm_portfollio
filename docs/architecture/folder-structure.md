@@ -42,13 +42,18 @@ carlo_sjm_portfollio/
 │   │   │   ├── FilmGrain.tsx      # Overlay SVG inline [001]
 │   │   │   └── ScrollChevron.tsx  # Bounce animation, links to #about [002]
 │   │   ├── sections/              # Secciones del portfolio
-│   │   │   └── HeroSection.tsx    # Hero full-viewport [002-hero-section]
+│   │   │   ├── HeroSection.tsx    # Hero full-viewport [002-hero-section]
+│   │   │   ├── AboutSection.tsx   # About: bio + photo placeholder [003-about-section]
+│   │   │   └── AboutInView.tsx    # 'use client' whileInView wrapper [003]
 │   │   ├── contact/               # ContactForm, SocialLinks (TODO M3/M4)
 │   │   └── ui/                    # Componentes base reutilizables
 │   │       ├── HeroAnimations.tsx # Framer Motion entrance wrapper [002]
-│   │       └── geometry/          # SVG geometry Server Components [002]
-│   │           ├── GeometricDots.tsx    # Dot grid pattern [002]
-│   │           └── FibonacciSpiral.tsx  # Golden ratio spiral [002]
+│   │       ├── PhotoPlaceholder.tsx # Vesica Piscis photo placeholder [003]
+│   │       └── geometry/          # SVG geometry Server Components
+│   │           ├── GeometricDots.tsx    # Dot grid 600 divs [002]
+│   │           ├── FibonacciSpiral.tsx  # Sacred geometry spiral [002]
+│   │           ├── SpiralPetals.tsx     # 8-petal spiral, slow-rotate 200s [003]
+│   │           └── GridOverlay.tsx      # SVG pattern grid overlay [003]
 │   │
 │   ├── lib/                       # Logica compartida
 │   │   ├── site.ts                # Constante SITE [001]
@@ -59,12 +64,13 @@ carlo_sjm_portfollio/
 │   ├── data/                      # Contenido editable centralizado
 │   │   ├── navigation.ts          # NAV_LINKS (anchor nav) [001-layout-header]
 │   │   ├── hero.ts                # HERO_DATA constant [002-hero-section]
+│   │   ├── about.ts               # ABOUT_DATA constant [003-about-section]
 │   │   ├── projects.ts            # Datos de proyectos (TODO M3)
 │   │   ├── skills.ts              # Stack tecnologico (TODO M3)
 │   │   └── social.ts              # Links de redes sociales (TODO M3)
 │   │
 │   ├── types/                     # Tipos TypeScript compartidos
-│   │   └── index.ts               # NavLink, SiteConfig, PersonSchemaData [001-layout-header]
+│   │   └── index.ts               # NavLink, SiteConfig, HeroData, AboutData... [001-003]
 │   │
 │   └── styles/
 │       └── globals.css            # Tailwind base + custom styles

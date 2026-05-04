@@ -29,6 +29,12 @@ export interface HeroData {
   readonly scrollTarget: `#${string}`;
 }
 
+export interface AboutData {
+  readonly eyebrow: string;
+  readonly heading: string;
+  readonly bio: readonly [string, string, string];
+}
+
 export interface PersonSchemaData {
   readonly name: string;
   readonly jobTitle: string;

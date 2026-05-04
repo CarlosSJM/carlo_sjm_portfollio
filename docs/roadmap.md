@@ -5,7 +5,7 @@
 
 ## Estado actual
 
-**M0, M1, M2 completados. M3 en curso — `001-layout-header` y `002-hero-section` cerrados. Pendiente: About, Skills, Experience, Projects, Education, Game of Life, Contact.**
+**M0, M1, M2 completados. M3 en curso — `001-layout-header`, `002-hero-section`, `003-about-section` cerrados. Pendiente: Skills, Experience, Projects, Education, Game of Life, Contact.**
 
 ---
 
@@ -68,12 +68,39 @@
 - [ ] `/speckit-implement` siguiendo el orden:
   - [x] Layout base (Header, Footer, Navigation) — `001-layout-header`
   - [x] Hero / Landing — `002-hero-section`
-  - [ ] Skills / Stack tecnologico
-  - [ ] Projects / Portfolio grid
-  - [ ] About / Sobre mi
-  - [ ] Contact (UI sin backend aun)
+  - [x] About / Sobre mi — `003-about-section`
+  - [ ] **Navegacion movil (hamburger menu)** — `010-mobile-nav` *(ver nota abajo)*
+  - [ ] Skills / Stack tecnologico — `004-skills-section`
+  - [ ] Experience / Timeline — `005-experience-section`
+  - [ ] Projects / Portfolio grid — `006-projects-section`
+  - [ ] Education — `007-education-section`
+  - [ ] Game of Life — `008-game-of-life`
+  - [ ] Contact (UI sin backend aun) — `009-contact-section`
 - [ ] Tema dark mode (light queda en M8)
 - [ ] Tipografias con `next/font`
+
+### Nota: `010-mobile-nav` — Menu hamburguesa para movil/tablet
+
+**Problema**: En pantallas < `md` (768 px) el nav de escritorio (`Header.tsx`) muestra todos los enlaces en horizontal, lo que provoca overflow y una experiencia visual muy mala.
+
+**Solucion propuesta**: Hamburger menu que reemplaza la nav en breakpoints `< md`.
+
+**Requisitos tecnicos**:
+- `MobileNav` como componente `'use client'` (requiere estado open/closed + `useEffect` para cerrar con `Escape`)
+- Icono hamburguesa (`Menu` / `X` de `lucide-react`) visible solo en `< md`; nav de escritorio visible solo en `md:`
+- Drawer o dropdown sobre el contenido — fondo `bg-black/95 backdrop-blur-sm`, `z-50`
+- Los enlaces cierran el menu al hacer click (`onClick={() => setOpen(false)}`)
+- Trampa de foco (`focus-trap`) cuando el drawer esta abierto — accesibilidad WCAG 2.1 AA
+- `aria-expanded`, `aria-controls`, `aria-label="Open menu"` / `"Close menu"` en el boton
+- `prefers-reduced-motion`: sin transicion de entrada si el usuario lo prefiere
+- `useEffect` para bloquear `overflow-hidden` en `<body>` mientras el drawer esta abierto
+- **No instalar librerias de dialog** — implementacion nativa con `<div role="dialog">` o `<dialog>` HTML5
+
+**Breakpoint de activacion**: `< md` (Tailwind `md:` = 768 px). En `md:` y superior no cambia nada del Header actual.
+
+**Tests**:
+- Vitest: estado del componente (open/closed toggle)
+- Playwright: boton hamburguesa visible en viewport 375 px; enlaces visibles al abrir; cierre con Escape; `aria-expanded` correcto
 
 **Criterio de salida**: todas las secciones renderizan correctamente con datos reales.
 

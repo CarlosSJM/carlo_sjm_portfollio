@@ -22,7 +22,7 @@ test.describe("Hero section", () => {
 
   test("renders location badge with Segovia", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByText("Segovia")).toBeVisible();
+    await expect(page.locator("#hero").getByText("Segovia")).toBeVisible();
   });
 
   test("VIEW PROJECTS CTA links to #projects", async ({ page }) => {

@@ -18,7 +18,8 @@
 | `HeroSection` | Server | ✅ [002] | Hero full-viewport, h1, CTAs, location badge, scroll chevron |
 | `AboutSection` | Server | ✅ [003] | Bio + foto placeholder, SpiralPetals, GridOverlay backgrounds |
 | `AboutInView` | **Client** | ✅ [003] | `whileInView` animation wrapper (opacity fade + optional x slide) |
-| `SkillsSection` | Server | TODO M3 | Grid 6 cards de stack tecnologico |
+| `SkillsSection` | Server | ✅ [004] | Grid responsive (1/2/3 columnas) de 6 `SkillCard` con eyebrow/heading |
+| `SkillsHeadingInView` | **Client** | ✅ [004] | `whileInView` fade wrapper para eyebrow+heading |
 | `ExperienceSection` | Server | TODO M3 | Timeline 4 empresas |
 | `ProjectsSection` | Server | TODO M3 | Grid 3 ProjectCards |
 | `EducationSection` | Server | TODO M3 | Grid 4 cards |
@@ -38,7 +39,7 @@
 |---|---|---|---|
 | `HeroAnimations` | **Client** | ✅ [002] | Single `motion.div` entrance wrapper (opacity+y, `useReducedMotion`) |
 | `PhotoPlaceholder` | Server | ✅ [003] | Circular clip placeholder con Vesica Piscis SVG frame |
-| `SkillCard` | Mixed | TODO M3 | Card con motion wrapper |
+| `SkillCard` | **Client** | ✅ [004] | Card con icono lucide, titulo, lista de skills; `whileInView` scale+fade con stagger `delay: index * 0.05`; hover border highlight |
 | `ProjectCard` | Mixed | TODO M3 | Card de proyecto con motion |
 | `TimelineItem` | Mixed | TODO M3 | Item del timeline de experiencia |
 
@@ -65,6 +66,7 @@
 `NavLink`, `SiteConfig`, `PersonSchemaData` — [001-layout-header]
 `CtaLink`, `HeroData` — [002-hero-section]
 `AboutData` — [003-about-section]
+`SkillCategory` — [004-skills-section]
 
 ## Data (`src/data/`)
 
@@ -73,8 +75,8 @@
 | `navigation.ts` | ✅ [001] | `NAV_LINKS: NavLink[]` |
 | `hero.ts` | ✅ [002] | `HERO_DATA: HeroData` |
 | `about.ts` | ✅ [003] | `ABOUT_DATA: AboutData` |
+| `skills.ts` | ✅ [004] | `SKILLS_DATA: readonly SkillCategory[]` (6 categorias) |
 | `projects.ts` | TODO M3 | — |
-| `skills.ts` | TODO M3 | — |
 | `social.ts` | TODO M3 | — |
 
 ## Client boundaries activas
@@ -85,6 +87,8 @@
 | `HeroAnimations` | `useReducedMotion` + entrance animation requiere DOM |
 | `AboutInView` | `whileInView` requiere IntersectionObserver (browser API) |
 | `MobileNav` | Estado open/closed, focus-trap con `keydown`, bloqueo de `body.style.overflow`, todo requiere DOM |
+| `SkillsHeadingInView` | `whileInView` requiere IntersectionObserver (browser API) |
+| `SkillCard` | `whileInView` con stagger por indice requiere IntersectionObserver (browser API) |
 
 ## Principio clave
 

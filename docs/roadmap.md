@@ -5,7 +5,7 @@
 
 ## Estado actual
 
-**M0, M1, M2 completados. M3 en curso — `001-layout-header`, `002-hero-section`, `003-about-section` cerrados. Pendiente: Skills, Experience, Projects, Education, Game of Life, Contact.**
+**M0, M1, M2 completados. M3 en curso — `001-layout-header`, `002-hero-section`, `003-about-section`, `010-mobile-nav` cerrados. Pendiente: Skills, Experience, Projects, Education, Game of Life, Contact.**
 
 ---
 
@@ -69,7 +69,7 @@
   - [x] Layout base (Header, Footer, Navigation) — `001-layout-header`
   - [x] Hero / Landing — `002-hero-section`
   - [x] About / Sobre mi — `003-about-section`
-  - [ ] **Navegacion movil (hamburger menu)** — `010-mobile-nav` *(ver nota abajo)*
+  - [x] **Navegacion movil (hamburger menu)** — `010-mobile-nav` *(ver nota abajo)*
   - [ ] Skills / Stack tecnologico — `004-skills-section`
   - [ ] Experience / Timeline — `005-experience-section`
   - [ ] Projects / Portfolio grid — `006-projects-section`
@@ -79,28 +79,29 @@
 - [ ] Tema dark mode (light queda en M8)
 - [ ] Tipografias con `next/font`
 
-### Nota: `010-mobile-nav` — Menu hamburguesa para movil/tablet
+### Nota: `010-mobile-nav` — Menu hamburguesa para movil/tablet ✅ implementado
 
-**Problema**: En pantallas < `md` (768 px) el nav de escritorio (`Header.tsx`) muestra todos los enlaces en horizontal, lo que provoca overflow y una experiencia visual muy mala.
+**Problema**: En pantallas < `md` (768 px) el nav de escritorio (`Header.tsx`) mostraba todos los enlaces en horizontal, lo que provocaba overflow y una experiencia visual muy mala.
 
-**Solucion propuesta**: Hamburger menu que reemplaza la nav en breakpoints `< md`.
+**Solucion implementada**: `MobileNav.tsx` (`'use client'`) — hamburger icon que abre un drawer full-screen con `role="dialog" aria-modal="true"`.
 
-**Requisitos tecnicos**:
-- `MobileNav` como componente `'use client'` (requiere estado open/closed + `useEffect` para cerrar con `Escape`)
-- Icono hamburguesa (`Menu` / `X` de `lucide-react`) visible solo en `< md`; nav de escritorio visible solo en `md:`
-- Drawer o dropdown sobre el contenido — fondo `bg-black/95 backdrop-blur-sm`, `z-50`
-- Los enlaces cierran el menu al hacer click (`onClick={() => setOpen(false)}`)
-- Trampa de foco (`focus-trap`) cuando el drawer esta abierto — accesibilidad WCAG 2.1 AA
-- `aria-expanded`, `aria-controls`, `aria-label="Open menu"` / `"Close menu"` en el boton
-- `prefers-reduced-motion`: sin transicion de entrada si el usuario lo prefiere
-- `useEffect` para bloquear `overflow-hidden` en `<body>` mientras el drawer esta abierto
-- **No instalar librerias de dialog** — implementacion nativa con `<div role="dialog">` o `<dialog>` HTML5
+**Detalles tecnicos**:
+- Icono hamburguesa (`Menu` / `X` de `lucide-react`) visible solo en `< md`; nav de escritorio (`hidden md:flex`) visible solo en `md:`
+- Drawer fijo — `bg-black/95 backdrop-blur-sm`, `z-50`, cierra al hacer click en un enlace, en el backdrop, o con `Escape`
+- Trampa de foco manual (sin libreria) cicla `Tab`/`Shift+Tab` entre los elementos focusables del drawer
+- `aria-expanded`, `aria-controls="mobile-nav-drawer"`, `aria-label="Open menu"` / `"Close menu"` en el boton
+- `useReducedMotion` (motion/react) desactiva la transicion de opacidad si el usuario prefiere movimiento reducido
+- `document.body.style.overflow = "hidden"` mientras el drawer esta abierto, restaurado al cerrar
+- Foco vuelve al boton toggle al cerrar (Escape, click en enlace, o click fuera)
+- Sin librerias nuevas — `<div role="dialog">` nativo + `lucide-react`/`motion` ya instalados
 
-**Breakpoint de activacion**: `< md` (Tailwind `md:` = 768 px). En `md:` y superior no cambia nada del Header actual.
+**Bugs encontrados y corregidos durante implementacion**:
+1. El drawer usaba `flex-col items-center justify-center` con 7 enlaces; en viewports bajos (812px) el contenido desbordaba por arriba del viewport y `justify-center` + overflow no permite scroll hacia contenido que desborda en el eje de inicio (comportamiento estandar de Flexbox). Fix: `justify-start` + `overflow-y-auto py-24`, que centra visualmente en pantallas normales y permite scroll cuando hay overflow.
+2. **(detectado en prueba manual con Chrome DevTools tras el merge de tests automatizados)** El drawer (`position: fixed`) se renderizaba mal posicionado — anclado a los 63px de alto del `<header>` en vez de a toda la ventana. Causa: `<header>` usa `backdrop-blur-md` (`backdrop-filter`), y por especificacion CSS cualquier ancestro con `backdrop-filter`/`filter`/`transform` se convierte en el *containing block* de sus descendientes `position: fixed`. Playwright no detecto esto porque los asserts de tamaño/posicion no comparaban contra el viewport completo. Fix: el drawer se renderiza via `createPortal(..., document.body)` en `MobileNav.tsx`, sacandolo del arbol del `<header>`.
 
 **Tests**:
-- Vitest: estado del componente (open/closed toggle)
-- Playwright: boton hamburguesa visible en viewport 375 px; enlaces visibles al abrir; cierre con Escape; `aria-expanded` correcto
+- Vitest (`tests/unit/mobile-nav.test.tsx`): toggle abre/cierra, `aria-expanded` correcto, Escape cierra, click en enlace cierra
+- Playwright (`tests/e2e/mobile-nav.spec.ts`): viewport 375px vs 1280px, apertura/cierre, navegacion por hash, foco atrapado y restaurado — corre con `contextOptions: { reducedMotion: "reduce" }` para evitar flakiness por la transicion de Framer Motion
 
 **Criterio de salida**: todas las secciones renderizan correctamente con datos reales.
 

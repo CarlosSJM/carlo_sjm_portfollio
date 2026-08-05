@@ -60,6 +60,14 @@ CONTACT_EMAIL=        # Email destino del formulario (alias de addy.io)
 
 Nunca commitear `.env.local`. Configurar en Vercel Dashboard.
 
+## Verificacion manual pre-entrega
+
+**Regla obligatoria**: antes de dar por terminada cualquier feature o fix (aunque Vitest y Playwright esten en verde), Claude debe levantar `npm run dev` y probar la funcionalidad manualmente en el navegador via Claude-in-Chrome — recorrer el golden path y los edge cases relevantes (incluyendo breakpoints responsive si aplica). Los tests automatizados verifican comportamiento especificado, no que la feature se vea/funcione bien en la practica.
+
+Motivo: en `010-mobile-nav` los 44 tests de Playwright pasaban en verde, pero el drawer se renderizaba mal posicionado en el navegador real — el `Header` con `backdrop-blur` convertia el `<header>` en el *containing block* de sus descendientes `position: fixed`, algo que los asserts automatizados no detectaron porque no comparaban el tamaño del drawer contra el viewport completo.
+
+Tras la verificacion de Claude, el usuario debe revisar y aprobar la feature el mismo antes de mergear.
+
 ## Documentacion viva
 
 **Regla obligatoria**: tras completar **cualquier task individual de spec-kit, cualquier phase, cualquier commit, o cualquier decision tecnica**, hacer un pase de revision documental antes de avanzar. Actualizar todo lo implicado:

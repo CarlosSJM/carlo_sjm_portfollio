@@ -138,6 +138,8 @@ and testing of each story.
 - [ ] TXXX Verify total JS bundle < 50KB gzip
 - [ ] TXXX Verify all pages are SSG (no `force-dynamic`)
 - [ ] TXXX Final `npm run lint && npx tsc --noEmit && npm run test && npm run test:e2e`
+- [ ] TXXX **Manual browser verification (Claude)**: start `npm run dev`, use Claude-in-Chrome to click through the golden path and edge cases (including responsive breakpoints if relevant) before declaring the feature done — automated tests can pass while the feature is still visually/behaviorally broken (see `010-mobile-nav`, where Playwright was green but the drawer rendered mispositioned due to `backdrop-filter` creating a containing block)
+- [ ] TXXX **Manual verification (user)**: user reviews the running feature themselves and approves before merge
 
 ---
 

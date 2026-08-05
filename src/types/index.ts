@@ -35,6 +35,12 @@ export interface AboutData {
   readonly bio: readonly [string, string, string];
 }
 
+export interface SkillCategory {
+  readonly title: string;
+  readonly iconName: "Layout" | "Settings" | "Server" | "Terminal" | "Database" | "Code2";
+  readonly skills: readonly string[];
+}
+
 export interface PersonSchemaData {
   readonly name: string;
   readonly jobTitle: string;

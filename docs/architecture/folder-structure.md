@@ -45,11 +45,14 @@ carlo_sjm_portfollio/
 │   │   ├── sections/              # Secciones del portfolio
 │   │   │   ├── HeroSection.tsx    # Hero full-viewport [002-hero-section]
 │   │   │   ├── AboutSection.tsx   # About: bio + photo placeholder [003-about-section]
-│   │   │   └── AboutInView.tsx    # 'use client' whileInView wrapper [003]
+│   │   │   ├── AboutInView.tsx    # 'use client' whileInView wrapper [003]
+│   │   │   ├── SkillsSection.tsx  # Skills: grid responsive 6 categorias [004-skills-section]
+│   │   │   └── SkillsHeadingInView.tsx # 'use client' whileInView wrapper para heading [004]
 │   │   ├── contact/               # ContactForm, SocialLinks (TODO M3/M4)
 │   │   └── ui/                    # Componentes base reutilizables
 │   │       ├── HeroAnimations.tsx # Framer Motion entrance wrapper [002]
 │   │       ├── PhotoPlaceholder.tsx # Vesica Piscis photo placeholder [003]
+│   │       ├── SkillCard.tsx      # 'use client' card con icono + whileInView stagger [004]
 │   │       └── geometry/          # SVG geometry Server Components
 │   │           ├── GeometricDots.tsx    # Dot grid 600 divs [002]
 │   │           ├── FibonacciSpiral.tsx  # Sacred geometry spiral [002]
@@ -66,12 +69,12 @@ carlo_sjm_portfollio/
 │   │   ├── navigation.ts          # NAV_LINKS (anchor nav) [001-layout-header]
 │   │   ├── hero.ts                # HERO_DATA constant [002-hero-section]
 │   │   ├── about.ts               # ABOUT_DATA constant [003-about-section]
+│   │   ├── skills.ts              # SKILLS_DATA constant, 6 categorias [004-skills-section]
 │   │   ├── projects.ts            # Datos de proyectos (TODO M3)
-│   │   ├── skills.ts              # Stack tecnologico (TODO M3)
 │   │   └── social.ts              # Links de redes sociales (TODO M3)
 │   │
 │   ├── types/                     # Tipos TypeScript compartidos
-│   │   └── index.ts               # NavLink, SiteConfig, HeroData, AboutData... [001-003]
+│   │   └── index.ts               # NavLink, SiteConfig, HeroData, AboutData, SkillCategory... [001-004]
 │   │
 │   └── styles/
 │       └── globals.css            # Tailwind base + custom styles

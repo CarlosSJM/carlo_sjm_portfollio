@@ -5,7 +5,7 @@
 
 ## Estado actual
 
-**M0, M1, M2 completados. M3 en curso — `001-layout-header`, `002-hero-section`, `003-about-section`, `010-mobile-nav` cerrados. Pendiente: Skills, Experience, Projects, Education, Game of Life, Contact.**
+**M0, M1, M2 completados. M3 en curso — `001-layout-header`, `002-hero-section`, `003-about-section`, `010-mobile-nav`, `004-skills-section` cerrados. Pendiente: Experience, Projects, Education, Game of Life, Contact.**
 
 ---
 
@@ -70,7 +70,7 @@
   - [x] Hero / Landing — `002-hero-section`
   - [x] About / Sobre mi — `003-about-section`
   - [x] **Navegacion movil (hamburger menu)** — `010-mobile-nav` *(ver nota abajo)*
-  - [ ] Skills / Stack tecnologico — `004-skills-section`
+  - [x] Skills / Stack tecnologico — `004-skills-section`
   - [ ] Experience / Timeline — `005-experience-section`
   - [ ] Projects / Portfolio grid — `006-projects-section`
   - [ ] Education — `007-education-section`
@@ -102,6 +102,22 @@
 **Tests**:
 - Vitest (`tests/unit/mobile-nav.test.tsx`): toggle abre/cierra, `aria-expanded` correcto, Escape cierra, click en enlace cierra
 - Playwright (`tests/e2e/mobile-nav.spec.ts`): viewport 375px vs 1280px, apertura/cierre, navegacion por hash, foco atrapado y restaurado — corre con `contextOptions: { reducedMotion: "reduce" }` para evitar flakiness por la transicion de Framer Motion
+
+**Criterio de salida**: todas las secciones renderizan correctamente con datos reales.
+
+---
+
+### Nota: `004-skills-section` — Skills implementado, bug preexistente detectado (no bloqueante)
+
+**Implementado**: `SkillsSection` (Server Component) + `SkillCard` (`'use client'`, `whileInView` scale+fade con stagger `delay: index * 0.05`) + `SkillsHeadingInView` (`'use client'`, fade del eyebrow/heading). Grid responsive `grid md:grid-cols-2 lg:grid-cols-3 gap-6`, 6 categorias desde `SKILLS_DATA` (`src/data/skills.ts`), iconos de `lucide-react` (`Layout`, `Settings`, `Server`, `Terminal`, `Database`, `Code2`).
+
+**Bug preexistente detectado durante testing (fuera del alcance de esta feature)**: al escribir los tests de overflow horizontal para `#skills` (siguiendo la leccion de `010-mobile-nav`), se detecto un desbordamiento horizontal de 1-6px en el documento a nivel global en viewports estrechos (375px, 768px), causado por `GeometricDots` (Hero) y el grid de `About` — no por Skills. Los tests de `skills.spec.ts` se acotaron a `boundingBox()` de `#skills` en vez de `document.documentElement.scrollWidth` para no acoplar esta feature a un bug ajeno. **Pendiente**: crear un fix dedicado para el overflow de Hero/About (candidato a hotfix rapido, no requiere spec-kit completo).
+
+**Tests**:
+- Vitest (`tests/unit/skills.test.ts`): 6 categorias, orden correcto, campos no vacios
+- Playwright (`tests/e2e/skills.spec.ts`): eyebrow/heading visibles, 6 titulos + skills conocidos visibles, iconos `aria-hidden`, sin overflow en `#skills` a 375/768/1280px, contenido visible tras scroll
+
+**Verificacion manual**: confirmado visualmente en Chrome a ~1813px (grid 3 columnas, hover funcionando, sin overlaps). La verificacion a 375px no pudo repetirse visualmente en esta sesion por un fallo del `resize_window` de la extension (atascado en 150x564px pese a pedir otros tamanos) — se confio en los Playwright tests (que controlan el viewport via CDP, no afectados por ese bug) como evidencia suficiente.
 
 **Criterio de salida**: todas las secciones renderizan correctamente con datos reales.
 

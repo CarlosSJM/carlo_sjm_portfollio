@@ -1,8 +1,8 @@
 import { HeroSection } from "@/components/sections/HeroSection";
 import { AboutSection } from "@/components/sections/AboutSection";
+import { SkillsSection } from "@/components/sections/SkillsSection";
 
 const PLACEHOLDER_SECTIONS = [
-  "skills",
   "experience",
   "projects",
   "education",
@@ -15,6 +15,7 @@ export default function HomePage(): React.JSX.Element {
     <>
       <HeroSection />
       <AboutSection />
+      <SkillsSection />
 
       {PLACEHOLDER_SECTIONS.map((id) => (
         <section

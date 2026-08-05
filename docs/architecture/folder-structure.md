@@ -35,12 +35,13 @@ carlo_sjm_portfollio/
 │   │   └── not-found.tsx          # Pagina 404 personalizada
 │   │
 │   ├── components/
-│   │   ├── layout/                # Header, Footer, SkipToContent, FilmGrain, ScrollChevron
-│   │   │   ├── Header.tsx         # Sticky nav con NAV_LINKS [001]
+│   │   ├── layout/                # Header, Footer, SkipToContent, FilmGrain, ScrollChevron, MobileNav
+│   │   │   ├── Header.tsx         # Sticky nav con NAV_LINKS [001]; lista oculta < md [010]
 │   │   │   ├── Footer.tsx         # Copyright + tagline [001]
 │   │   │   ├── SkipToContent.tsx  # A11y skip link [001]
 │   │   │   ├── FilmGrain.tsx      # Overlay SVG inline [001]
-│   │   │   └── ScrollChevron.tsx  # Bounce animation, links to #about [002]
+│   │   │   ├── ScrollChevron.tsx  # Bounce animation, links to #about [002]
+│   │   │   └── MobileNav.tsx      # 'use client' hamburger drawer < md [010-mobile-nav]
 │   │   ├── sections/              # Secciones del portfolio
 │   │   │   ├── HeroSection.tsx    # Hero full-viewport [002-hero-section]
 │   │   │   ├── AboutSection.tsx   # About: bio + photo placeholder [003-about-section]

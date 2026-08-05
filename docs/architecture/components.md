@@ -4,12 +4,12 @@
 
 | Componente | Tipo | Estado | Responsabilidad |
 |---|---|---|---|
-| `Header` | Server | ✅ [001] | Sticky nav con NAV_LINKS, aria-label="Main", logo a `/` |
+| `Header` | Server | ✅ [001, actualizado 010] | Sticky nav con NAV_LINKS, aria-label="Main", logo a `/`; lista `<ul>` oculta `< md` (`hidden md:flex`), delega a `MobileNav` |
 | `Footer` | Server | ✅ [001] | Copyright dinamico (`new Date().getFullYear()`) + tagline |
 | `SkipToContent` | Server | ✅ [001] | Link `#main` con `sr-only`/`focus:not-sr-only` |
 | `FilmGrain` | Server | ✅ [001] | Overlay SVG `feTurbulence` inline, `aria-hidden`, mix-blend-overlay |
 | `ScrollChevron` | **Client** | ✅ [002] | Bounce animation `y:[0,10,0]`, links to `#about` |
-| `MobileNav` | **Client** | TODO [010] | Hamburger drawer para `< md`; open/closed state, focus-trap, Escape key |
+| `MobileNav` | **Client** | ✅ [010] | Hamburger toggle + drawer `role="dialog"` visible `< md`; focus-trap, Escape key, click-outside, body scroll lock, foco restaurado al cerrar; drawer renderizado con `createPortal` a `document.body` (evita que `backdrop-blur` del `Header` lo reposicione como *containing block*) |
 
 ## Secciones (`src/components/sections/`)
 
@@ -84,7 +84,7 @@
 | `ScrollChevron` | `motion.div` animate requiere DOM |
 | `HeroAnimations` | `useReducedMotion` + entrance animation requiere DOM |
 | `AboutInView` | `whileInView` requiere IntersectionObserver (browser API) |
-| `MobileNav` *(pendiente)* | Estado open/closed + `useEffect` para Escape key y body overflow |
+| `MobileNav` | Estado open/closed, focus-trap con `keydown`, bloqueo de `body.style.overflow`, todo requiere DOM |
 
 ## Principio clave
 

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { NAV_LINKS } from "@/data/navigation";
 import { SITE } from "@/lib/site";
+import { MobileNav } from "@/components/layout/MobileNav";
 
 export function Header(): React.JSX.Element {
   return (
@@ -16,7 +17,7 @@ export function Header(): React.JSX.Element {
         >
           {SITE.name.split(" ").map((w) => w[0]).join("")}
         </Link>
-        <ul className="flex items-center gap-6 flex-wrap">
+        <ul className="hidden md:flex items-center gap-6 flex-wrap">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <a
@@ -28,6 +29,7 @@ export function Header(): React.JSX.Element {
             </li>
           ))}
         </ul>
+        <MobileNav links={NAV_LINKS} />
       </nav>
     </header>
   );

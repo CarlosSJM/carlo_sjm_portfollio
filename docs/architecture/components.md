@@ -20,7 +20,8 @@
 | `AboutInView` | **Client** | ✅ [003] | `whileInView` animation wrapper (opacity fade + optional x slide) |
 | `SkillsSection` | Server | ✅ [004] | Grid responsive (1/2/3 columnas) de 6 `SkillCard` con eyebrow/heading |
 | `SkillsHeadingInView` | **Client** | ✅ [004] | `whileInView` fade wrapper para eyebrow+heading |
-| `ExperienceSection` | Server | TODO M3 | Timeline 4 empresas |
+| `ExperienceSection` | Server | ✅ [005] | Timeline vertical de 4 `TimelineItem` con eyebrow/heading |
+| `ExperienceHeadingInView` | **Client** | ✅ [005] | `whileInView` fade wrapper para eyebrow+heading |
 | `ProjectsSection` | Server | TODO M3 | Grid 3 ProjectCards |
 | `EducationSection` | Server | TODO M3 | Grid 4 cards |
 | `GameOfLifeSection` | Mixed | TODO M3 | Container server + canvas client (next/dynamic) |
@@ -41,7 +42,7 @@
 | `PhotoPlaceholder` | Server | ✅ [003] | Circular clip placeholder con Vesica Piscis SVG frame |
 | `SkillCard` | **Client** | ✅ [004] | Card con icono lucide, titulo, lista de skills; `whileInView` scale+fade con stagger `delay: index * 0.05`; hover border highlight |
 | `ProjectCard` | Mixed | TODO M3 | Card de proyecto con motion |
-| `TimelineItem` | Mixed | TODO M3 | Item del timeline de experiencia |
+| `TimelineItem` | **Client** | ✅ [005] | Diamond marker + linea conectora (`aria-hidden`), empresa, rol, periodo, descripcion, tags; `whileInView` slide-in-left con stagger `delay: index * 0.1` |
 
 ## Geometry (`src/components/ui/geometry/`)
 
@@ -67,6 +68,7 @@
 `CtaLink`, `HeroData` — [002-hero-section]
 `AboutData` — [003-about-section]
 `SkillCategory` — [004-skills-section]
+`ExperienceItem` — [005-experience-section]
 
 ## Data (`src/data/`)
 
@@ -76,6 +78,7 @@
 | `hero.ts` | ✅ [002] | `HERO_DATA: HeroData` |
 | `about.ts` | ✅ [003] | `ABOUT_DATA: AboutData` |
 | `skills.ts` | ✅ [004] | `SKILLS_DATA: readonly SkillCategory[]` (6 categorias) |
+| `experience.ts` | ✅ [005] | `EXPERIENCE_DATA: readonly ExperienceItem[]` (4 items) |
 | `projects.ts` | TODO M3 | — |
 | `social.ts` | TODO M3 | — |
 
@@ -89,6 +92,8 @@
 | `MobileNav` | Estado open/closed, focus-trap con `keydown`, bloqueo de `body.style.overflow`, todo requiere DOM |
 | `SkillsHeadingInView` | `whileInView` requiere IntersectionObserver (browser API) |
 | `SkillCard` | `whileInView` con stagger por indice requiere IntersectionObserver (browser API) |
+| `ExperienceHeadingInView` | `whileInView` requiere IntersectionObserver (browser API) |
+| `TimelineItem` | `whileInView` con stagger por indice requiere IntersectionObserver (browser API) |
 
 ## Principio clave
 

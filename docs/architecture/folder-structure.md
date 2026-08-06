@@ -47,12 +47,15 @@ carlo_sjm_portfollio/
 │   │   │   ├── AboutSection.tsx   # About: bio + photo placeholder [003-about-section]
 │   │   │   ├── AboutInView.tsx    # 'use client' whileInView wrapper [003]
 │   │   │   ├── SkillsSection.tsx  # Skills: grid responsive 6 categorias [004-skills-section]
-│   │   │   └── SkillsHeadingInView.tsx # 'use client' whileInView wrapper para heading [004]
+│   │   │   ├── SkillsHeadingInView.tsx # 'use client' whileInView wrapper para heading [004]
+│   │   │   ├── ExperienceSection.tsx    # Experience: timeline vertical 4 empresas [005-experience-section]
+│   │   │   └── ExperienceHeadingInView.tsx # 'use client' whileInView wrapper para heading [005]
 │   │   ├── contact/               # ContactForm, SocialLinks (TODO M3/M4)
 │   │   └── ui/                    # Componentes base reutilizables
 │   │       ├── HeroAnimations.tsx # Framer Motion entrance wrapper [002]
 │   │       ├── PhotoPlaceholder.tsx # Vesica Piscis photo placeholder [003]
 │   │       ├── SkillCard.tsx      # 'use client' card con icono + whileInView stagger [004]
+│   │       ├── TimelineItem.tsx   # 'use client' timeline item + whileInView stagger [005]
 │   │       └── geometry/          # SVG geometry Server Components
 │   │           ├── GeometricDots.tsx    # Dot grid 600 divs [002]
 │   │           ├── FibonacciSpiral.tsx  # Sacred geometry spiral [002]
@@ -70,11 +73,12 @@ carlo_sjm_portfollio/
 │   │   ├── hero.ts                # HERO_DATA constant [002-hero-section]
 │   │   ├── about.ts               # ABOUT_DATA constant [003-about-section]
 │   │   ├── skills.ts              # SKILLS_DATA constant, 6 categorias [004-skills-section]
+│   │   ├── experience.ts          # EXPERIENCE_DATA constant, 4 items [005-experience-section]
 │   │   ├── projects.ts            # Datos de proyectos (TODO M3)
 │   │   └── social.ts              # Links de redes sociales (TODO M3)
 │   │
 │   ├── types/                     # Tipos TypeScript compartidos
-│   │   └── index.ts               # NavLink, SiteConfig, HeroData, AboutData, SkillCategory... [001-004]
+│   │   └── index.ts               # NavLink, SiteConfig, HeroData, AboutData, SkillCategory, ExperienceItem... [001-005]
 │   │
 │   └── styles/
 │       └── globals.css            # Tailwind base + custom styles

@@ -1,9 +1,9 @@
 import { HeroSection } from "@/components/sections/HeroSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { SkillsSection } from "@/components/sections/SkillsSection";
+import { ExperienceSection } from "@/components/sections/ExperienceSection";
 
 const PLACEHOLDER_SECTIONS = [
-  "experience",
   "projects",
   "education",
   "gameoflife",
@@ -16,6 +16,7 @@ export default function HomePage(): React.JSX.Element {
       <HeroSection />
       <AboutSection />
       <SkillsSection />
+      <ExperienceSection />
 
       {PLACEHOLDER_SECTIONS.map((id) => (
         <section

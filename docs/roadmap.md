@@ -5,7 +5,7 @@
 
 ## Estado actual
 
-**M0, M1, M2 completados. M3 en curso — `001-layout-header`, `002-hero-section`, `003-about-section`, `010-mobile-nav`, `004-skills-section` cerrados. Pendiente: Experience, Projects, Education, Game of Life, Contact.**
+**M0, M1, M2 completados. M3 en curso — `001-layout-header`, `002-hero-section`, `003-about-section`, `010-mobile-nav`, `004-skills-section`, `005-experience-section` cerrados. Pendiente: Projects, Education, Game of Life, Contact.**
 
 ---
 
@@ -71,7 +71,7 @@
   - [x] About / Sobre mi — `003-about-section`
   - [x] **Navegacion movil (hamburger menu)** — `010-mobile-nav` *(ver nota abajo)*
   - [x] Skills / Stack tecnologico — `004-skills-section`
-  - [ ] Experience / Timeline — `005-experience-section`
+  - [x] Experience / Timeline — `005-experience-section`
   - [ ] Projects / Portfolio grid — `006-projects-section`
   - [ ] Education — `007-education-section`
   - [ ] Game of Life — `008-game-of-life`
@@ -118,6 +118,22 @@
 - Playwright (`tests/e2e/skills.spec.ts`): eyebrow/heading visibles, 6 titulos + skills conocidos visibles, iconos `aria-hidden`, sin overflow en `#skills` a 375/768/1280px, contenido visible tras scroll
 
 **Verificacion manual**: confirmado visualmente en Chrome a ~1813px (grid 3 columnas, hover funcionando, sin overlaps). La verificacion a 375px no pudo repetirse visualmente en esta sesion por un fallo del `resize_window` de la extension (atascado en 150x564px pese a pedir otros tamanos) — se confio en los Playwright tests (que controlan el viewport via CDP, no afectados por ese bug) como evidencia suficiente.
+
+**Criterio de salida**: todas las secciones renderizan correctamente con datos reales.
+
+---
+
+### Nota: `005-experience-section` — Experience implementado
+
+**Implementado**: `ExperienceSection` (Server Component) + `TimelineItem` (`'use client'`, `whileInView` slide-in-left con stagger `delay: index * 0.1`) + `ExperienceHeadingInView` (`'use client'`, fade del eyebrow/heading). Timeline vertical con marker diamante + linea conectora (`aria-hidden`), 4 items desde `EXPERIENCE_DATA` (`src/data/experience.ts`) en orden reverso-cronologico (BravePay, ICARUS, Ust-Global, Datmean), coincide exactamente con `docs/content-brief.md` y el Figma source (incluyendo la lista de 11 tags de ICARUS, la mas larga).
+
+**Regresion detectada y corregida**: al añadir Experience, el test `hero.spec.ts > renders role text` empezo a fallar — `getByText("FULL STACK DEVELOPER")` (case-insensitive) empezo a matchear tambien los roles "Full Stack Developer" de ICARUS y Datmean en Experience (violacion de modo estricto de Playwright). Mismo patron que el fix de "Segovia" en `003-about-section`. Fix: escopar el locator a `#hero`.
+
+**Tests**:
+- Vitest (`tests/unit/experience.test.ts`): 4 items, orden reverso-cronologico correcto, campos no vacios
+- Playwright (`tests/e2e/experience.spec.ts`): eyebrow/heading visibles, 4 empresas + tags conocidos visibles, markers `aria-hidden`, sin overflow en `#experience` a 375/768/1280px (acotado a `boundingBox()`, mismo enfoque que `004-skills-section` para no acoplarse al bug preexistente de Hero/About), contenido visible tras scroll
+
+**Verificacion manual**: confirmado visualmente en Chrome a ~1813px (timeline vertical con markers y linea conectora, 4 items completos, tags de ICARUS envolviendo correctamente con `flex-wrap` sin overflow — `boundingBox()` de `#experience` confirmado via JS: 1798px de ancho vs 1813px de viewport). Verificacion a 375px no repetida visualmente por el mismo bug de `resize_window` documentado en la nota de `004-skills-section` — se confio en Playwright (viewport via CDP) como evidencia.
 
 **Criterio de salida**: todas las secciones renderizan correctamente con datos reales.
 

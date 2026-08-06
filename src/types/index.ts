@@ -41,6 +41,14 @@ export interface SkillCategory {
   readonly skills: readonly string[];
 }
 
+export interface ExperienceItem {
+  readonly company: string;
+  readonly role: string;
+  readonly period: string;
+  readonly description: string;
+  readonly technologies: readonly string[];
+}
+
 export interface PersonSchemaData {
   readonly name: string;
   readonly jobTitle: string;

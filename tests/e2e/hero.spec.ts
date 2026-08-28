@@ -10,7 +10,7 @@ test.describe("Hero section", () => {
 
   test("renders role text", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByText("FULL STACK DEVELOPER")).toBeVisible();
+    await expect(page.locator("#hero").getByText("FULL STACK DEVELOPER")).toBeVisible();
   });
 
   test("renders tagline", async ({ page }) => {

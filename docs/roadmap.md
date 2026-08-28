@@ -5,7 +5,7 @@
 
 ## Estado actual
 
-**M0, M1, M2 completados. M3 en curso — `001-layout-header`, `002-hero-section`, `003-about-section`, `010-mobile-nav`, `004-skills-section` cerrados. Pendiente: Experience, Projects, Education, Game of Life, Contact.**
+**M0, M1, M2 completados. M3 en curso — `001-layout-header`, `002-hero-section`, `003-about-section`, `010-mobile-nav`, `004-skills-section`, `005-experience-section`, `011-about-photo` cerrados. Pendiente: Projects, Education, Game of Life, Contact.**
 
 ---
 
@@ -71,7 +71,7 @@
   - [x] About / Sobre mi — `003-about-section`
   - [x] **Navegacion movil (hamburger menu)** — `010-mobile-nav` *(ver nota abajo)*
   - [x] Skills / Stack tecnologico — `004-skills-section`
-  - [ ] Experience / Timeline — `005-experience-section`
+  - [x] Experience / Timeline — `005-experience-section`
   - [ ] Projects / Portfolio grid — `006-projects-section`
   - [ ] Education — `007-education-section`
   - [ ] Game of Life — `008-game-of-life`
@@ -120,6 +120,40 @@
 **Verificacion manual**: confirmado visualmente en Chrome a ~1813px (grid 3 columnas, hover funcionando, sin overlaps). La verificacion a 375px no pudo repetirse visualmente en esta sesion por un fallo del `resize_window` de la extension (atascado en 150x564px pese a pedir otros tamanos) — se confio en los Playwright tests (que controlan el viewport via CDP, no afectados por ese bug) como evidencia suficiente.
 
 **Criterio de salida**: todas las secciones renderizan correctamente con datos reales.
+
+---
+
+### Nota: `005-experience-section` — Experience implementado
+
+**Implementado**: `ExperienceSection` (Server Component) + `TimelineItem` (`'use client'`, `whileInView` slide-in-left con stagger `delay: index * 0.1`) + `ExperienceHeadingInView` (`'use client'`, fade del eyebrow/heading). Timeline vertical con marker diamante + linea conectora (`aria-hidden`), 4 items desde `EXPERIENCE_DATA` (`src/data/experience.ts`) en orden reverso-cronologico (BravePay, ICARUS, Ust-Global, Datmean), coincide exactamente con `docs/content-brief.md` y el Figma source (incluyendo la lista de 11 tags de ICARUS, la mas larga).
+
+**Regresion detectada y corregida**: al añadir Experience, el test `hero.spec.ts > renders role text` empezo a fallar — `getByText("FULL STACK DEVELOPER")` (case-insensitive) empezo a matchear tambien los roles "Full Stack Developer" de ICARUS y Datmean en Experience (violacion de modo estricto de Playwright). Mismo patron que el fix de "Segovia" en `003-about-section`. Fix: escopar el locator a `#hero`.
+
+**Tests**:
+- Vitest (`tests/unit/experience.test.ts`): 4 items, orden reverso-cronologico correcto, campos no vacios
+- Playwright (`tests/e2e/experience.spec.ts`): eyebrow/heading visibles, 4 empresas + tags conocidos visibles, markers `aria-hidden`, sin overflow en `#experience` a 375/768/1280px (acotado a `boundingBox()`, mismo enfoque que `004-skills-section` para no acoplarse al bug preexistente de Hero/About), contenido visible tras scroll
+
+**Verificacion manual**: confirmado visualmente en Chrome a ~1813px (timeline vertical con markers y linea conectora, 4 items completos, tags de ICARUS envolviendo correctamente con `flex-wrap` sin overflow — `boundingBox()` de `#experience` confirmado via JS: 1798px de ancho vs 1813px de viewport). Verificacion a 375px no repetida visualmente por el mismo bug de `resize_window` documentado en la nota de `004-skills-section` — se confio en Playwright (viewport via CDP) como evidencia.
+
+**Criterio de salida**: todas las secciones renderizan correctamente con datos reales.
+
+---
+
+### Nota: `011-about-photo` — Foto real de perfil (reemplaza el placeholder)
+
+**Implementado**: `ProfilePhoto` (Server Component, `next/image`) reemplaza `PhotoPlaceholder` (eliminado) en `AboutSection`. Reutiliza exactamente el mismo marco SVG Vesica Piscis y `clipPath: circle(40% at 50% 50%)`, solo cambia el contenido interior: un `<Image fill className="object-cover" priority>` en vez del `<div>` con texto "PROFILE IMAGE".
+
+**Origen de la imagen**: foto proporcionada por el usuario fuera del repo (`~/Imágenes/carlos_sjm_dev.jpeg`, 1066×1600, retrato B&N). Recortada con ImageMagick (`magick ... -crop 1066x1066+0+70 -resize 900x900 -quality 87`) a un cuadrado 900×900 (~64KB) alineado para que la cara quede centrada en el tercio superior y se vean los hombros y el inicio de los brazos cruzados, segun encuadre pedido explicitamente por el usuario. El archivo original nunca se commitea — solo el resultado recortado/recomprimido en `public/images/carlos-sjm.jpg`.
+
+**Datos**: `AboutData` (`src/types/index.ts`) extendido con `photoSrc: \`/${string}\`` y `photoAlt: string`; poblado en `src/data/about.ts` (`photoSrc: "/images/carlos-sjm.jpg"`, `photoAlt: "Carlos SJM, portrait"`).
+
+**Tests**:
+- Vitest (`tests/unit/about.test.ts`): `photoSrc` matchea `/^\/images\//`, `photoAlt` no vacio
+- Playwright (`tests/e2e/about.spec.ts`): test "profile photo is visible with accessible label" (reemplaza el antiguo test del placeholder) — `getByRole("img", { name: "Carlos SJM, portrait" })` visible
+
+**Verificacion manual**: confirmado en Chrome con dev server — cara y torso bien encuadrados dentro del marco circular, `alt` correcto verificado via `javascript_tool` (`img.alt === "Carlos SJM, portrait"`, imagen servida optimizada a 320×320 por `next/image`). El bug de `resize_window` (atascado, no aplica el resize real) persistio en esta sesion — como evidencia sustituta se generaron capturas reales con un script Playwright standalone a 375px y 1280px, confirmando sin overflow (`sectionWidth === viewportWidth` en ambos) y buen encuadre de la foto en los dos breakpoints.
+
+**Criterio de salida**: foto real visible en producción del About section, sin placeholder pendiente (cierra el follow-up de foto real mencionado en sesiones previas).
 
 ---
 

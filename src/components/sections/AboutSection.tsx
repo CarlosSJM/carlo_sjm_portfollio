@@ -1,7 +1,7 @@
 import { ABOUT_DATA } from "@/data/about";
 import { SpiralPetals } from "@/components/ui/geometry/SpiralPetals";
 import { GridOverlay } from "@/components/ui/geometry/GridOverlay";
-import { PhotoPlaceholder } from "@/components/ui/PhotoPlaceholder";
+import { ProfilePhoto } from "@/components/ui/ProfilePhoto";
 import { AboutInView } from "@/components/sections/AboutInView";
 
 export function AboutSection(): React.JSX.Element {
@@ -17,7 +17,7 @@ export function AboutSection(): React.JSX.Element {
         <AboutInView>
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="flex justify-center">
-              <PhotoPlaceholder />
+              <ProfilePhoto src={ABOUT_DATA.photoSrc} alt={ABOUT_DATA.photoAlt} />
             </div>
 
             <div>

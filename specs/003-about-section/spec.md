@@ -73,7 +73,7 @@ Content fades in as the visitor scrolls into the about section — opacity 0→1
 ### Edge Cases
 
 - Bio text contains "Segovia" not "Madrid" (content-brief update)
-- Photo placeholder renders until task #22 provides real photo
+- Photo placeholder renders until task #22 provides real photo — **resolved in `011-about-photo`**: `PhotoPlaceholder` replaced by `ProfilePhoto` with the real portrait
 - `whileInView` with `viewport={{ once: true }}` — animates only on first scroll-into-view
 
 ## Requirements

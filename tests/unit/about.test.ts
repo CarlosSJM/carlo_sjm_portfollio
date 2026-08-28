@@ -18,4 +18,9 @@ describe("ABOUT_DATA", () => {
     expect(ABOUT_DATA.bio[2]).toContain("Segovia");
     expect(ABOUT_DATA.bio[2]).not.toContain("Madrid");
   });
+
+  it("has a local photoSrc and non-empty photoAlt", () => {
+    expect(ABOUT_DATA.photoSrc).toMatch(/^\/images\//);
+    expect(ABOUT_DATA.photoAlt.length).toBeGreaterThan(0);
+  });
 });

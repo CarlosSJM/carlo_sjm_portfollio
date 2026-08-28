@@ -1,4 +1,11 @@
-export function PhotoPlaceholder(): React.JSX.Element {
+import Image from "next/image";
+
+interface ProfilePhotoProps {
+  readonly src: `/${string}`;
+  readonly alt: string;
+}
+
+export function ProfilePhoto({ src, alt }: ProfilePhotoProps): React.JSX.Element {
   return (
     <div className="relative w-64 h-64 md:w-80 md:h-80">
       <svg
@@ -28,16 +35,17 @@ export function PhotoPlaceholder(): React.JSX.Element {
       </svg>
 
       <div
-        role="img"
-        aria-label="Profile photo placeholder"
-        className="absolute inset-0 flex items-center justify-center bg-[#1a1a1a]"
+        className="absolute inset-0 overflow-hidden bg-[#1a1a1a]"
         style={{ clipPath: "circle(40% at 50% 50%)" }}
       >
-        <div className="text-white/20 text-sm font-mono tracking-widest text-center">
-          PROFILE
-          <br />
-          IMAGE
-        </div>
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          sizes="(min-width: 768px) 320px, 256px"
+          className="object-cover"
+          priority
+        />
       </div>
     </div>
   );

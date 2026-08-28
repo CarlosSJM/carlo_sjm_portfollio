@@ -16,7 +16,7 @@
 | Componente | Tipo | Estado | Responsabilidad |
 |---|---|---|---|
 | `HeroSection` | Server | ✅ [002] | Hero full-viewport, h1, CTAs, location badge, scroll chevron |
-| `AboutSection` | Server | ✅ [003] | Bio + foto placeholder, SpiralPetals, GridOverlay backgrounds |
+| `AboutSection` | Server | ✅ [003, foto real 011] | Bio + foto de perfil real, SpiralPetals, GridOverlay backgrounds |
 | `AboutInView` | **Client** | ✅ [003] | `whileInView` animation wrapper (opacity fade + optional x slide) |
 | `SkillsSection` | Server | ✅ [004] | Grid responsive (1/2/3 columnas) de 6 `SkillCard` con eyebrow/heading |
 | `SkillsHeadingInView` | **Client** | ✅ [004] | `whileInView` fade wrapper para eyebrow+heading |
@@ -39,7 +39,7 @@
 | Componente | Tipo | Estado | Responsabilidad |
 |---|---|---|---|
 | `HeroAnimations` | **Client** | ✅ [002] | Single `motion.div` entrance wrapper (opacity+y, `useReducedMotion`) |
-| `PhotoPlaceholder` | Server | ✅ [003] | Circular clip placeholder con Vesica Piscis SVG frame |
+| `ProfilePhoto` | Server | ✅ [011, reemplaza PhotoPlaceholder de 003] | `next/image` con `fill` + `object-cover` dentro del mismo marco circular Vesica Piscis; recibe `src`/`alt` desde `ABOUT_DATA` |
 | `SkillCard` | **Client** | ✅ [004] | Card con icono lucide, titulo, lista de skills; `whileInView` scale+fade con stagger `delay: index * 0.05`; hover border highlight |
 | `ProjectCard` | Mixed | TODO M3 | Card de proyecto con motion |
 | `TimelineItem` | **Client** | ✅ [005] | Diamond marker + linea conectora (`aria-hidden`), empresa, rol, periodo, descripcion, tags; `whileInView` slide-in-left con stagger `delay: index * 0.1` |
@@ -66,7 +66,7 @@
 
 `NavLink`, `SiteConfig`, `PersonSchemaData` — [001-layout-header]
 `CtaLink`, `HeroData` — [002-hero-section]
-`AboutData` — [003-about-section]
+`AboutData` (+ `photoSrc`/`photoAlt` [011]) — [003-about-section]
 `SkillCategory` — [004-skills-section]
 `ExperienceItem` — [005-experience-section]
 

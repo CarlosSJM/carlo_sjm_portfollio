@@ -33,6 +33,8 @@ export interface AboutData {
   readonly eyebrow: string;
   readonly heading: string;
   readonly bio: readonly [string, string, string];
+  readonly photoSrc: `/${string}`;
+  readonly photoAlt: string;
 }
 
 export interface SkillCategory {

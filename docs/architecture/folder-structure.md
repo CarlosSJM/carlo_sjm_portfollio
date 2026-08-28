@@ -21,6 +21,7 @@ carlo_sjm_portfollio/
 ├── public/                        # Assets estaticos (favicon, og-image, robots)
 │   ├── icons/                     # SVGs de redes sociales (self-hosted)
 │   └── images/                    # Imagenes optimizadas del portfolio
+│       └── carlos-sjm.jpg         # Foto de perfil real, 900x900 recortada/comprimida [011]
 │
 ├── src/
 │   ├── app/                       # Next.js App Router
@@ -53,7 +54,7 @@ carlo_sjm_portfollio/
 │   │   ├── contact/               # ContactForm, SocialLinks (TODO M3/M4)
 │   │   └── ui/                    # Componentes base reutilizables
 │   │       ├── HeroAnimations.tsx # Framer Motion entrance wrapper [002]
-│   │       ├── PhotoPlaceholder.tsx # Vesica Piscis photo placeholder [003]
+│   │       ├── ProfilePhoto.tsx   # next/image + marco Vesica Piscis, foto real [011]
 │   │       ├── SkillCard.tsx      # 'use client' card con icono + whileInView stagger [004]
 │   │       ├── TimelineItem.tsx   # 'use client' timeline item + whileInView stagger [005]
 │   │       └── geometry/          # SVG geometry Server Components
@@ -78,7 +79,7 @@ carlo_sjm_portfollio/
 │   │   └── social.ts              # Links de redes sociales (TODO M3)
 │   │
 │   ├── types/                     # Tipos TypeScript compartidos
-│   │   └── index.ts               # NavLink, SiteConfig, HeroData, AboutData, SkillCategory, ExperienceItem... [001-005]
+│   │   └── index.ts               # NavLink, SiteConfig, HeroData, AboutData (+photoSrc/photoAlt), SkillCategory, ExperienceItem... [001-005, 011]
 │   │
 │   └── styles/
 │       └── globals.css            # Tailwind base + custom styles

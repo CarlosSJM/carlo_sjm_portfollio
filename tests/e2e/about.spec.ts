@@ -33,11 +33,11 @@ test.describe("About section", () => {
     expect(await ariaHidden.count()).toBeGreaterThanOrEqual(1);
   });
 
-  test("photo placeholder is visible with accessible label", async ({ page }) => {
+  test("profile photo is visible with accessible label", async ({ page }) => {
     await page.goto("/");
     await page.locator("#about").scrollIntoViewIfNeeded();
-    const placeholder = page.getByRole("img", { name: "Profile photo placeholder" });
-    await expect(placeholder).toBeVisible();
+    const photo = page.getByRole("img", { name: "Carlos SJM, portrait" });
+    await expect(photo).toBeVisible();
   });
 
   test("content is visible after scrolling into view", async ({ page }) => {

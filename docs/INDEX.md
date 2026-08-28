@@ -22,6 +22,7 @@
 
 - [Contacto privado](privacy/contact-form.md) — Arquitectura del formulario de contacto sin exponer email
 - [Redes sociales](privacy/social-links.md) — Links sociales con maxima privacidad
+- [Deployment Protection](privacy/deployment-protection.md) — Sitio publico en Vercel sin exponer sourcemaps
 
 ## Testing
 

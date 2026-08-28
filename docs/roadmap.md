@@ -157,6 +157,14 @@
 
 ---
 
+### Nota: deploy temprano e informal en Vercel (adelantado a M6)
+
+El usuario conecto el proyecto a Vercel (importacion del repo de GitHub via Dashboard, sin `vercel link`) para poder ver el resultado en vivo durante el desarrollo de M3, antes de llegar formalmente a M6. No sustituye el checklist de M6 (que sigue pendiente hasta cerrar M4/M5) — es solo una preview temprana.
+
+**Deployment Protection**: por defecto Vercel exigia login para ver la web ("Vercel Authentication"). Se desactivo para que el sitio sea publico, y se activo por separado **"Protected Source Maps"** para que los `.map` del bundle no queden expuestos al desactivar la proteccion general. Detalle completo en [`docs/privacy/deployment-protection.md`](privacy/deployment-protection.md).
+
+---
+
 ## M4 — SEO + Privacy hardening
 
 **Objetivo**: Cumplir todas las requisitos de los principios II (SEO) y III (Privacy) de la constitution.

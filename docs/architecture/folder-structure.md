@@ -61,6 +61,7 @@ carlo_sjm_portfollio/
 │   │       ├── SkillCard.tsx      # 'use client' card con icono + whileInView stagger [004]
 │   │       ├── TimelineItem.tsx   # 'use client' timeline item + whileInView stagger [005]
 │   │       ├── GameOfLife.tsx     # 'use client' canvas + controles, logica delegada a src/lib/gameOfLife.ts [008]
+│   │       ├── GameOfLifeHelp.tsx # 'use client' modal accesible de ayuda (portal + focus-trap) [008]
 │   │       └── geometry/          # SVG geometry Server Components
 │   │           ├── GeometricDots.tsx    # Dot grid 600 divs [002]
 │   │           ├── FibonacciSpiral.tsx  # Sacred geometry spiral [002]

@@ -45,7 +45,8 @@
 | `SkillCard` | **Client** | ✅ [004] | Card con icono lucide, titulo, lista de skills; `whileInView` scale+fade con stagger `delay: index * 0.05`; hover border highlight |
 | `ProjectCard` | Mixed | TODO M3 | Card de proyecto con motion |
 | `TimelineItem` | **Client** | ✅ [005] | Diamond marker + linea conectora (`aria-hidden`), empresa, rol, periodo, descripcion, tags; `whileInView` slide-in-left con stagger `delay: index * 0.1` |
-| `GameOfLife` | **Client** | ✅ [008] | Canvas 1200x500, controles Play/Pause/Reset/Randomize/Glider/Pulsar/velocidad/tamano celda; logica pura delegada a `src/lib/gameOfLife.ts` |
+| `GameOfLife` | **Client** | ✅ [008] | Canvas 1200x500, controles Play/Pause/Reset/Randomize/Glider/Pulsar/velocidad/tamano celda; grid inicial sembrado con poblacion aleatoria (no vacio); logica pura delegada a `src/lib/gameOfLife.ts` |
+| `GameOfLifeHelp` | **Client** | ✅ [008] | Modal `role="dialog"` accesible (focus-trap, Escape, click-fuera, ✕) explicando las reglas de Conway y cada control; portal a `document.body` (mismo patron que `MobileNav`) |
 
 ## Geometry (`src/components/ui/geometry/`)
 
@@ -104,6 +105,7 @@
 | `GameOfLifeHeadingInView` | `whileInView` requiere IntersectionObserver (browser API) |
 | `GameOfLifeGridInView` | `next/dynamic(..., { ssr: false })` requiere Client Component; `whileInView` requiere IntersectionObserver |
 | `GameOfLife` | Estado (grid, generacion, controles), `canvas.getContext('2d')`, `setInterval` — todo requiere DOM |
+| `GameOfLifeHelp` | Modal con focus-trap, `keydown`, `document.body.style.overflow`, `createPortal` — todo requiere DOM |
 
 ## Principio clave
 

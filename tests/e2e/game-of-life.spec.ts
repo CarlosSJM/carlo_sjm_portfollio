@@ -24,12 +24,24 @@ test.describe("Game of Life section", () => {
     ).toBeVisible();
   });
 
-  test("canvas grid loads and is clickable to toggle a cell", async ({ page }) => {
+  test("grid is seeded with a random population on load (not empty)", async ({ page }) => {
+    await page.goto("/");
+    await page.locator("#gameoflife").scrollIntoViewIfNeeded();
+    const canvas = page.locator("#gameoflife canvas");
+    await expect(canvas).toBeVisible();
+    // Seeded randomly so PLAY shows something evolving immediately —
+    // astronomically unlikely to land on an all-dead grid.
+    await expect(page.locator("#gameoflife")).not.toContainText("POPULATION: 0");
+  });
+
+  test("canvas grid is clickable to toggle a cell", async ({ page }) => {
     await page.goto("/");
     await page.locator("#gameoflife").scrollIntoViewIfNeeded();
     const canvas = page.locator("#gameoflife canvas");
     await expect(canvas).toBeVisible();
 
+    // Start from a known-empty grid so the toggle assertion is deterministic.
+    await page.getByRole("button", { name: "Reset grid" }).click();
     await expect(page.locator("#gameoflife")).toContainText("POPULATION: 0");
     await canvas.click({ position: { x: 5, y: 5 } });
     await expect(page.locator("#gameoflife")).toContainText("POPULATION: 1");
@@ -64,6 +76,41 @@ test.describe("Game of Life section", () => {
     await page.getByRole("button", { name: "Reset grid" }).click();
     await expect(page.locator("#gameoflife")).toContainText("POPULATION: 0");
     await expect(page.locator("#gameoflife")).toContainText("GENERATION: 0");
+  });
+
+  test.describe("help modal", () => {
+    test("opens with an explanation of the rules and each control", async ({ page }) => {
+      await page.goto("/");
+      await page.locator("#gameoflife").scrollIntoViewIfNeeded();
+      await page.getByRole("button", { name: "How this works — open help" }).click();
+
+      const dialog = page.getByRole("dialog", { name: "HOW IT WORKS" });
+      await expect(dialog).toBeVisible();
+      await expect(dialog.getByText("cellular automaton")).toBeVisible();
+      await expect(dialog.getByText("PLAY / PAUSE")).toBeVisible();
+      await expect(dialog.getByText("GLIDER / PULSAR")).toBeVisible();
+    });
+
+    test("closes via the X button and restores focus to the help button", async ({ page }) => {
+      await page.goto("/");
+      await page.locator("#gameoflife").scrollIntoViewIfNeeded();
+      const helpButton = page.getByRole("button", { name: "How this works — open help" });
+      await helpButton.click();
+
+      await page.getByRole("button", { name: "Close help" }).click();
+      await expect(page.getByRole("dialog")).toBeHidden();
+      await expect(helpButton).toBeFocused();
+    });
+
+    test("closes via Escape", async ({ page }) => {
+      await page.goto("/");
+      await page.locator("#gameoflife").scrollIntoViewIfNeeded();
+      await page.getByRole("button", { name: "How this works — open help" }).click();
+      await expect(page.getByRole("dialog")).toBeVisible();
+
+      await page.keyboard.press("Escape");
+      await expect(page.getByRole("dialog")).toBeHidden();
+    });
   });
 
   test("Glider and Pulsar presets load a non-empty pattern", async ({ page }) => {
@@ -133,6 +180,9 @@ test.describe("Game of Life section", () => {
       await page.goto("/");
       await page.locator("#gameoflife").scrollIntoViewIfNeeded();
       const canvas = page.locator("#gameoflife canvas");
+      // Start from a known-empty grid so the toggle assertion is deterministic.
+      await page.getByRole("button", { name: "Reset grid" }).click();
+      await expect(page.locator("#gameoflife")).toContainText("POPULATION: 0");
       await canvas.click({ position: { x: 5, y: 5 } });
       await expect(page.locator("#gameoflife")).toContainText("POPULATION: 1");
     });

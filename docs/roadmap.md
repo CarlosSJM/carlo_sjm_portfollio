@@ -187,6 +187,20 @@ El usuario conecto el proyecto a Vercel (importacion del repo de GitHub via Dash
 
 **Criterio de salida**: todas las secciones renderizan correctamente con datos reales.
 
+### Nota: `008-game-of-life` — ajustes tras feedback de usuario en primera prueba manual
+
+Tras la primera prueba manual, el usuario senalo 3 puntos de UX no cubiertos por el spec original:
+
+1. **Grid vacio al cargar → PLAY no mostraba nada**: fix, el grid ahora se siembra con poblacion aleatoria (`createRandomGrid`, misma densidad 30% que Randomize) al montar y al redimensionar (cambio de cell size), en vez de `createEmptyGrid`. El boton **Reset** sigue limpiando a vacio explicitamente (para dibujar patrones propios).
+2. **Faltaba boton de ayuda**: nuevo boton "?" (`CircleHelp`) en la esquina superior derecha del canvas, abre `GameOfLifeHelp` — modal accesible (portal a `document.body`, focus-trap, Escape/backdrop/✕, foco restaurado al cerrar — mismo patron que `MobileNav`) explicando las 4 reglas de Conway y cada control en lenguaje llano.
+3. **Primer parrafo sin explicar que es Game of Life**: `GAME_OF_LIFE_DATA.description` reescrito para liderar con una definicion concreta (cellular automaton, 4 reglas) en vez de solo "zero-player game".
+
+**Bug encontrado al implementar el modal de ayuda**: mismo tipo de bug que `010-mobile-nav` — el backdrop usaba `flex items-center` para centrar verticalmente; como el contenido del modal (reglas + 7 controles) es mas alto que el viewport, la parte superior quedaba inalcanzable con scroll (mismo problema de contenido centrado via flexbox que desborda). Fix: `items-start` en vez de `items-center`.
+
+**Tests nuevos**: bloque `help modal` en Playwright (abre con contenido de reglas+controles, cierra via ✕ + foco restaurado, cierra via Escape) + test dedicado a confirmar el grid sembrado no-vacio al cargar. Tests de click-to-toggle existentes actualizados para hacer `Reset` primero (el grid ya no es determinísticamente vacio al cargar).
+
+**Verificacion manual**: confirmado en Chrome — POPULATION: 2771 al cargar (grid sembrado), PLAY confirmado evolucionando visualmente (generacion 0→13, poblacion bajando de 2771 a 1784 con clusters organicos formandose, comportamiento tipico de Conway), modal de ayuda abre/cierra correctamente con todo el contenido visible sin overflow.
+
 ---
 
 ## M4 — SEO + Privacy hardening

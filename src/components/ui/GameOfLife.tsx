@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { Play, Pause, RotateCcw, Shuffle, Grid3x3, Zap } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Play, Pause, RotateCcw, Shuffle, Grid3x3, Zap, CircleHelp } from "lucide-react";
 import {
   type Grid,
   createEmptyGrid,
@@ -13,6 +13,7 @@ import {
   GLIDER_PATTERN,
   PULSAR_PATTERN,
 } from "@/lib/gameOfLife";
+import { GameOfLifeHelp } from "@/components/ui/GameOfLifeHelp";
 
 interface GameOfLifeProps {
   readonly width?: number;
@@ -21,18 +22,22 @@ interface GameOfLifeProps {
 
 export function GameOfLife({ width = 1200, height = 500 }: GameOfLifeProps): React.JSX.Element {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const helpButtonRef = useRef<HTMLButtonElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [cellSize, setCellSize] = useState(8);
   const [speed, setSpeed] = useState(100);
 
   const cols = Math.floor(width / cellSize);
   const rows = Math.floor(height / cellSize);
 
-  const [grid, setGrid] = useState<Grid>(() => createEmptyGrid(rows, cols));
+  // Seeded with a random population (not empty) so pressing PLAY the first
+  // time immediately shows cells interacting instead of a blank grid.
+  const [grid, setGrid] = useState<Grid>(() => createRandomGrid(rows, cols));
   const [generation, setGeneration] = useState(0);
   const population = countPopulation(grid);
 
-  // Reset the grid whenever the resolution (cell size / canvas dimensions)
+  // Reseed the grid whenever the resolution (cell size / canvas dimensions)
   // changes. Adjusting state during render (React's documented pattern for
   // "resetting state when a prop changes") instead of in an effect, so it
   // doesn't trigger a cascading extra render.
@@ -40,7 +45,7 @@ export function GameOfLife({ width = 1200, height = 500 }: GameOfLifeProps): Rea
   const [prevGridKey, setPrevGridKey] = useState(gridKey);
   if (gridKey !== prevGridKey) {
     setPrevGridKey(gridKey);
-    setGrid(createEmptyGrid(rows, cols));
+    setGrid(createRandomGrid(rows, cols));
     setGeneration(0);
     setIsPlaying(false);
   }
@@ -130,6 +135,11 @@ export function GameOfLife({ width = 1200, height = 500 }: GameOfLifeProps): Rea
     setIsPlaying(false);
   };
 
+  // Stable identity (useCallback) so GameOfLifeHelp's effect can safely list
+  // it as a dependency without re-running on every unrelated re-render
+  // (e.g. each game-loop tick while the modal happens to be open).
+  const closeHelp = useCallback(() => setIsHelpOpen(false), []);
+
   return (
     <div className="w-full">
       <div className="relative mb-8 border border-white/20 overflow-hidden group">
@@ -152,7 +162,19 @@ export function GameOfLife({ width = 1200, height = 500 }: GameOfLifeProps): Rea
             POPULATION: <span className="text-white">{population}</span>
           </div>
         </div>
+
+        <button
+          ref={helpButtonRef}
+          type="button"
+          onClick={() => setIsHelpOpen(true)}
+          aria-label="How this works — open help"
+          className="absolute top-4 right-4 bg-black/80 border border-white/20 p-2 text-white/60 hover:text-white hover:border-white/50 transition-colors"
+        >
+          <CircleHelp className="w-4 h-4" strokeWidth={1.5} aria-hidden="true" />
+        </button>
       </div>
+
+      <GameOfLifeHelp isOpen={isHelpOpen} onClose={closeHelp} triggerRef={helpButtonRef} />
 
       <div className="grid md:grid-cols-2 gap-6">
         <div className="space-y-4">

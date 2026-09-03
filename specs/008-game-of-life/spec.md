@@ -8,6 +8,18 @@
 
 `docs/content-brief.md` originally scoped M3 as a "simple version" (toggle + play/pause/reset + auto-step), deferring presets, speed control, cell size control, and generation/population counters to a future task (#21). The actual Figma export (`GameOfLife.tsx`) already implements the full-featured version. **Decision (user, 2026-09-03): ship the full Figma version now** rather than the scoped-down one — it's already designed and coded, and closes task #21 in the same pass instead of leaving it as a stub.
 
+## Post-implementation user feedback (2026-09-03)
+
+After the first manual test, the user flagged three UX gaps not covered by the original spec:
+
+1. **"Al dar a PLAY por primera vez no sale nada"** — the grid started empty, so Conway's rules produce no visible change on an all-dead board. Fix: seed the grid with a random population (`createRandomGrid`, same 30% density as Randomize) on mount and whenever the grid is resized (cell size / dimensions change), instead of `createEmptyGrid`. The explicit **Reset** button still clears to empty (drawing-your-own-pattern use case is unaffected). **Randomize** behavior unchanged.
+2. **Missing help/explanation for newcomers** — added a "?" (`CircleHelp`) button, top-right of the canvas overlay (mirrors the stats overlay's position), opening an accessible modal (`GameOfLifeHelp.tsx`, portal-rendered to `document.body`, `role="dialog"`, focus trap, Escape/backdrop/✕ to close, focus restored to the trigger button on close — same accessible-dialog pattern as `MobileNav`). Content: what a cellular automaton is, the four Conway rules spelled out, and a plain-language explanation of every control (click-to-toggle, Play/Pause, Reset, Randomize, Speed, Cell size, Glider/Pulsar).
+3. **First paragraph didn't explain what Game of Life actually is** — `GAME_OF_LIFE_DATA.description` rewritten to lead with a concrete definition ("a cellular automaton: a grid of cells that live, die, or are born each generation following four simple rules...") instead of only "a zero-player game that demonstrates emergent complexity."
+
+**Bug found while implementing the help modal**: same class of bug as `010-mobile-nav` — the backdrop used `flex items-center` for vertical centering; since the modal's content (rules + 7 control descriptions) is taller than the viewport, the top portion became unreachable by scroll (centered-flex-item overflow is not scrollable toward the cross-axis start in the direction needed). Fixed with `items-start` instead of `items-center`, same resolution as the mobile nav drawer's `justify-start` fix.
+
+**New tests**: Playwright `help modal` describe block (3 tests: opens with rules+controls content, closes via ✕ + focus restore, closes via Escape) + a dedicated "grid is seeded with a random population on load" test. Existing click-to-toggle tests updated to explicitly `Reset` first (grid is no longer deterministically empty on load, so those assertions needed a known starting state).
+
 ## User Scenarios & Testing
 
 ### User Story 1 — Visitor reads what the section is about (Priority: P1)

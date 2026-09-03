@@ -51,6 +51,12 @@ export interface ExperienceItem {
   readonly technologies: readonly string[];
 }
 
+export interface GameOfLifeData {
+  readonly eyebrow: string;
+  readonly heading: string;
+  readonly description: string;
+}
+
 export interface PersonSchemaData {
   readonly name: string;
   readonly jobTitle: string;

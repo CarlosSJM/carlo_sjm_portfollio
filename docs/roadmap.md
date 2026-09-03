@@ -5,7 +5,7 @@
 
 ## Estado actual
 
-**M0, M1, M2 completados. M3 en curso — `001-layout-header`, `002-hero-section`, `003-about-section`, `010-mobile-nav`, `004-skills-section`, `005-experience-section`, `011-about-photo` cerrados. Pendiente: Projects, Education, Game of Life, Contact.**
+**M0, M1, M2 completados. M3 en curso — `001-layout-header`, `002-hero-section`, `003-about-section`, `010-mobile-nav`, `004-skills-section`, `005-experience-section`, `011-about-photo`, `008-game-of-life` cerrados. Pendiente: Projects, Education, Contact.**
 
 ---
 
@@ -74,7 +74,7 @@
   - [x] Experience / Timeline — `005-experience-section`
   - [ ] Projects / Portfolio grid — `006-projects-section`
   - [ ] Education — `007-education-section`
-  - [ ] Game of Life — `008-game-of-life`
+  - [x] Game of Life — `008-game-of-life`
   - [ ] Contact (UI sin backend aun) — `009-contact-section`
 - [ ] Tema dark mode (light queda en M8)
 - [ ] Tipografias con `next/font`
@@ -162,6 +162,44 @@
 El usuario conecto el proyecto a Vercel (importacion del repo de GitHub via Dashboard, sin `vercel link`) para poder ver el resultado en vivo durante el desarrollo de M3, antes de llegar formalmente a M6. No sustituye el checklist de M6 (que sigue pendiente hasta cerrar M4/M5) — es solo una preview temprana.
 
 **Deployment Protection**: por defecto Vercel exigia login para ver la web ("Vercel Authentication"). Se desactivo para que el sitio sea publico, y se activo por separado **"Protected Source Maps"** para que los `.map` del bundle no queden expuestos al desactivar la proteccion general. Detalle completo en [`docs/privacy/deployment-protection.md`](privacy/deployment-protection.md).
+
+---
+
+### Nota: `008-game-of-life` — Game of Life implementado (version completa, cierra tarea #21)
+
+**Decision de alcance**: `docs/content-brief.md` habia reservado presets/velocidad/tamano de celda/contadores para una tarea futura (#21), pero el Figma export ya traia la version completa implementada. Decision del usuario: implementar la version completa ahora en vez de la recortada, cerrando la tarea #21 en el mismo pase.
+
+**Implementado**: `GameOfLifeSection` (Server Component, eyebrow/heading/descripcion + `CircuitPattern` de fondo) + `GameOfLifeGridInView` (`'use client'`, `next/dynamic(..., { ssr: false })` + `whileInView` fade/slide-in, con skeleton `aria-hidden` mientras carga) + `GameOfLife` (`'use client'`, canvas 1200x500, controles Play/Pause/Reset/Randomize, presets Glider/Pulsar, sliders de velocidad y tamano de celda, contadores GENERATION/POPULATION).
+
+**Logica de Conway extraida a `src/lib/gameOfLife.ts`**: puro, sin dependencias de React/canvas — `countNeighbors` (toroidal/wraparound), `nextGeneration` (las 4 reglas), `toggleCell`/`createEmptyGrid`/`createRandomGrid`/`applyPattern` (todas inmutables), `GLIDER_PATTERN`/`PULSAR_PATTERN`. Motivo: jsdom no soporta `canvas.getContext('2d')` (sin paquete `canvas`, por Minimal Dependencies), asi que la logica se testea 100% en Vitest y el dibujado se verifica en Playwright/navegador real. Ver `docs/testing/strategy.md`.
+
+**Bugs encontrados y corregidos durante el porteo desde el Figma source**:
+1. **Coordenadas de click incorrectas en cualquier viewport < 1200px**: el source calculaba la celda clickeada dividiendo `clientX/clientY - rect.left/top` directamente por `cellSize`, sin compensar que el canvas se renderiza a un tamano CSS distinto de su resolucion interna (1200x500 escalado via `w-full h-auto`). Esto rompia el click-to-toggle en practicamente cualquier pantalla no-desktop-ancha. Fix: escalar las coordenadas por `canvas.width / rect.width` y `canvas.height / rect.height` antes de dividir por `cellSize`. Verificado con un test de Playwright dedicado a 375px.
+2. **Mutacion de estado no inmutable**: el toggle de celda del source hacia `const newGrid = [...grid]; newGrid[x][y] = ...`, que copia el array externo pero muta el mismo array de fila compartido. Fix: `toggleCell()` en la lib hace una copia inmutable completa.
+3. **`noUncheckedIndexedAccess`**: el source asumia `grid[row][col]` siempre definido; el proyecto tiene ese flag de TS activo. Fix: acceso seguro via `grid[row]?.[col] ?? false` en toda la logica de la lib.
+4. **`react-hooks/set-state-in-effect`**: el reset de grid al cambiar `cellSize`/`width`/`height` originalmente vivia en un `useEffect` llamando `setState` sincronicamente (cascading renders, flagueado por el linter). Fix: patron oficial de React "ajustar estado durante el render" — comparar una `gridKey` derivada contra su valor previo (en estado) y llamar `setState` en el cuerpo del render si cambio, en vez de en un efecto.
+
+**Tests**:
+- Vitest (`tests/unit/game-of-life.test.ts`, 20 tests): las 4 reglas de Conway (incluyendo un blinker completo), wraparound toroidal, inmutabilidad de `toggleCell`, dimensiones de `createEmptyGrid`/`createRandomGrid`, `applyPattern` centrado y con clipping en bordes
+- Playwright (`tests/e2e/game-of-life.spec.ts`, 14 tests): click-to-toggle (incluyendo el caso de viewport estrecho que verifica el fix de escalado), Play/Pause avanzando generaciones, Reset/Randomize, presets Glider/Pulsar, sliders de velocidad/tamano de celda, sin overflow a 375/768/1280px
+
+**Verificacion manual**: confirmado en Chrome con dev server — glider cargado y confirmado visualmente evolucionando (generacion 14, poblacion estable en 5 celdas tras varias generaciones, tal como se espera de un glider real), controles Play/Reset/Randomize/presets funcionando, layout de controles PLAYBACK/CONFIGURATION correcto. Verificacion visual a viewport movil no repetida por el mismo bug de `resize_window` (reporto 3440x1275 en vez de 390x844 pedido) — se confio en el test de Playwright dedicado al click en viewport estrecho (375px) como evidencia, que es el escenario critico del bug de coordenadas corregido.
+
+**Criterio de salida**: todas las secciones renderizan correctamente con datos reales.
+
+### Nota: `008-game-of-life` — ajustes tras feedback de usuario en primera prueba manual
+
+Tras la primera prueba manual, el usuario senalo 3 puntos de UX no cubiertos por el spec original:
+
+1. **Grid vacio al cargar → PLAY no mostraba nada**: fix, el grid ahora se siembra con poblacion aleatoria (`createRandomGrid`, misma densidad 30% que Randomize) al montar y al redimensionar (cambio de cell size), en vez de `createEmptyGrid`. El boton **Reset** sigue limpiando a vacio explicitamente (para dibujar patrones propios).
+2. **Faltaba boton de ayuda**: nuevo boton "?" (`CircleHelp`) en la esquina superior derecha del canvas, abre `GameOfLifeHelp` — modal accesible (portal a `document.body`, focus-trap, Escape/backdrop/✕, foco restaurado al cerrar — mismo patron que `MobileNav`) explicando las 4 reglas de Conway y cada control en lenguaje llano.
+3. **Primer parrafo sin explicar que es Game of Life**: `GAME_OF_LIFE_DATA.description` reescrito para liderar con una definicion concreta (cellular automaton, 4 reglas) en vez de solo "zero-player game".
+
+**Bug encontrado al implementar el modal de ayuda**: mismo tipo de bug que `010-mobile-nav` — el backdrop usaba `flex items-center` para centrar verticalmente; como el contenido del modal (reglas + 7 controles) es mas alto que el viewport, la parte superior quedaba inalcanzable con scroll (mismo problema de contenido centrado via flexbox que desborda). Fix: `items-start` en vez de `items-center`.
+
+**Tests nuevos**: bloque `help modal` en Playwright (abre con contenido de reglas+controles, cierra via ✕ + foco restaurado, cierra via Escape) + test dedicado a confirmar el grid sembrado no-vacio al cargar. Tests de click-to-toggle existentes actualizados para hacer `Reset` primero (el grid ya no es determinísticamente vacio al cargar).
+
+**Verificacion manual**: confirmado en Chrome — POPULATION: 2771 al cargar (grid sembrado), PLAY confirmado evolucionando visualmente (generacion 0→13, poblacion bajando de 2771 a 1784 con clusters organicos formandose, comportamiento tipico de Conway), modal de ayuda abre/cierra correctamente con todo el contenido visible sin overflow.
 
 ---
 

@@ -50,23 +50,30 @@ carlo_sjm_portfollio/
 │   │   │   ├── SkillsSection.tsx  # Skills: grid responsive 6 categorias [004-skills-section]
 │   │   │   ├── SkillsHeadingInView.tsx # 'use client' whileInView wrapper para heading [004]
 │   │   │   ├── ExperienceSection.tsx    # Experience: timeline vertical 4 empresas [005-experience-section]
-│   │   │   └── ExperienceHeadingInView.tsx # 'use client' whileInView wrapper para heading [005]
+│   │   │   ├── ExperienceHeadingInView.tsx # 'use client' whileInView wrapper para heading [005]
+│   │   │   ├── GameOfLifeSection.tsx    # Game of Life: eyebrow/heading + CircuitPattern + delega grid [008-game-of-life]
+│   │   │   ├── GameOfLifeHeadingInView.tsx # 'use client' whileInView wrapper para heading [008]
+│   │   │   └── GameOfLifeGridInView.tsx # 'use client' next/dynamic(ssr:false) + whileInView del grid [008]
 │   │   ├── contact/               # ContactForm, SocialLinks (TODO M3/M4)
 │   │   └── ui/                    # Componentes base reutilizables
 │   │       ├── HeroAnimations.tsx # Framer Motion entrance wrapper [002]
 │   │       ├── ProfilePhoto.tsx   # next/image + marco Vesica Piscis, foto real [011]
 │   │       ├── SkillCard.tsx      # 'use client' card con icono + whileInView stagger [004]
 │   │       ├── TimelineItem.tsx   # 'use client' timeline item + whileInView stagger [005]
+│   │       ├── GameOfLife.tsx     # 'use client' canvas + controles, logica delegada a src/lib/gameOfLife.ts [008]
+│   │       ├── GameOfLifeHelp.tsx # 'use client' modal accesible de ayuda (portal + focus-trap) [008]
 │   │       └── geometry/          # SVG geometry Server Components
 │   │           ├── GeometricDots.tsx    # Dot grid 600 divs [002]
 │   │           ├── FibonacciSpiral.tsx  # Sacred geometry spiral [002]
 │   │           ├── SpiralPetals.tsx     # 8-petal spiral, slow-rotate 200s [003]
-│   │           └── GridOverlay.tsx      # SVG pattern grid overlay [003]
+│   │           ├── GridOverlay.tsx      # SVG pattern grid overlay [003]
+│   │           └── CircuitPattern.tsx   # SVG circuit-board pattern overlay [008]
 │   │
 │   ├── lib/                       # Logica compartida
 │   │   ├── site.ts                # Constante SITE [001]
 │   │   ├── metadata.ts            # buildMetadata() helper [001]
 │   │   ├── schema.ts              # buildPersonSchema, buildWebSiteSchema [001]
+│   │   ├── gameOfLife.ts          # Reglas de Conway puras, sin canvas/React [008]
 │   │   └── resend.ts              # Cliente de Resend para emails (TODO M4)
 │   │
 │   ├── data/                      # Contenido editable centralizado
@@ -75,11 +82,12 @@ carlo_sjm_portfollio/
 │   │   ├── about.ts               # ABOUT_DATA constant [003-about-section]
 │   │   ├── skills.ts              # SKILLS_DATA constant, 6 categorias [004-skills-section]
 │   │   ├── experience.ts          # EXPERIENCE_DATA constant, 4 items [005-experience-section]
+│   │   ├── gameOfLife.ts          # GAME_OF_LIFE_DATA constant [008-game-of-life]
 │   │   ├── projects.ts            # Datos de proyectos (TODO M3)
 │   │   └── social.ts              # Links de redes sociales (TODO M3)
 │   │
 │   ├── types/                     # Tipos TypeScript compartidos
-│   │   └── index.ts               # NavLink, SiteConfig, HeroData, AboutData (+photoSrc/photoAlt), SkillCategory, ExperienceItem... [001-005, 011]
+│   │   └── index.ts               # NavLink, SiteConfig, HeroData, AboutData (+photoSrc/photoAlt), SkillCategory, ExperienceItem, GameOfLifeData... [001-005, 008, 011]
 │   │
 │   └── styles/
 │       └── globals.css            # Tailwind base + custom styles

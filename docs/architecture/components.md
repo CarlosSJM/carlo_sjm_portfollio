@@ -24,7 +24,9 @@
 | `ExperienceHeadingInView` | **Client** | ✅ [005] | `whileInView` fade wrapper para eyebrow+heading |
 | `ProjectsSection` | Server | TODO M3 | Grid 3 ProjectCards |
 | `EducationSection` | Server | TODO M3 | Grid 4 cards |
-| `GameOfLifeSection` | Mixed | TODO M3 | Container server + canvas client (next/dynamic) |
+| `GameOfLifeSection` | Server | ✅ [008] | Eyebrow/heading/descripcion + `CircuitPattern` de fondo + delega el grid a `GameOfLifeGridInView` |
+| `GameOfLifeHeadingInView` | **Client** | ✅ [008] | `whileInView` fade wrapper para eyebrow+heading+descripcion |
+| `GameOfLifeGridInView` | **Client** | ✅ [008] | `next/dynamic(..., { ssr: false })` del canvas + `whileInView` fade/slide-in; skeleton `aria-hidden` mientras carga |
 | `ContactSection` | Mixed | TODO M3 | Header server + ContactForm client |
 
 ## Contacto (`src/components/contact/`)
@@ -43,6 +45,7 @@
 | `SkillCard` | **Client** | ✅ [004] | Card con icono lucide, titulo, lista de skills; `whileInView` scale+fade con stagger `delay: index * 0.05`; hover border highlight |
 | `ProjectCard` | Mixed | TODO M3 | Card de proyecto con motion |
 | `TimelineItem` | **Client** | ✅ [005] | Diamond marker + linea conectora (`aria-hidden`), empresa, rol, periodo, descripcion, tags; `whileInView` slide-in-left con stagger `delay: index * 0.1` |
+| `GameOfLife` | **Client** | ✅ [008] | Canvas 1200x500, controles Play/Pause/Reset/Randomize/Glider/Pulsar/velocidad/tamano celda; logica pura delegada a `src/lib/gameOfLife.ts` |
 
 ## Geometry (`src/components/ui/geometry/`)
 
@@ -52,6 +55,7 @@
 | `FibonacciSpiral` | Server | ✅ [002] | Sacred geometry (Seed of Life, Merkaba, dashed rings), `animate-slow-spin` 150s |
 | `SpiralPetals` | Server | ✅ [003] | 8 petal spirals + 40 spiral lines, `animate-slow-rotate` 200s |
 | `GridOverlay` | Server | ✅ [003] | SVG `<pattern>` grid 60×60, `opacity-10` |
+| `CircuitPattern` | Server | ✅ [008] | SVG `<pattern>` circuit-board, `opacity-5`, fondo de Game of Life |
 
 ## Lib (`src/lib/`)
 
@@ -60,6 +64,7 @@
 | `site.ts` | ✅ [001] | `SITE: SiteConfig` |
 | `metadata.ts` | ✅ [001] | `buildMetadata(overrides?): Metadata` |
 | `schema.ts` | ✅ [001] | `buildPersonSchema()`, `buildWebSiteSchema()` + types |
+| `gameOfLife.ts` | ✅ [008] | Logica pura de Conway (`countNeighbors`, `nextGeneration`, `toggleCell`, `createEmptyGrid`, `createRandomGrid`, `applyPattern`, `countPopulation`, `GLIDER_PATTERN`, `PULSAR_PATTERN`) — sin dependencias de canvas/React, testeable en jsdom |
 | `resend.ts` | TODO M4 | Cliente Resend |
 
 ## Tipos (`src/types/index.ts`)
@@ -69,6 +74,7 @@
 `AboutData` (+ `photoSrc`/`photoAlt` [011]) — [003-about-section]
 `SkillCategory` — [004-skills-section]
 `ExperienceItem` — [005-experience-section]
+`GameOfLifeData` — [008-game-of-life]
 
 ## Data (`src/data/`)
 
@@ -79,6 +85,7 @@
 | `about.ts` | ✅ [003] | `ABOUT_DATA: AboutData` |
 | `skills.ts` | ✅ [004] | `SKILLS_DATA: readonly SkillCategory[]` (6 categorias) |
 | `experience.ts` | ✅ [005] | `EXPERIENCE_DATA: readonly ExperienceItem[]` (4 items) |
+| `gameOfLife.ts` | ✅ [008] | `GAME_OF_LIFE_DATA: GameOfLifeData` |
 | `projects.ts` | TODO M3 | — |
 | `social.ts` | TODO M3 | — |
 
@@ -94,6 +101,9 @@
 | `SkillCard` | `whileInView` con stagger por indice requiere IntersectionObserver (browser API) |
 | `ExperienceHeadingInView` | `whileInView` requiere IntersectionObserver (browser API) |
 | `TimelineItem` | `whileInView` con stagger por indice requiere IntersectionObserver (browser API) |
+| `GameOfLifeHeadingInView` | `whileInView` requiere IntersectionObserver (browser API) |
+| `GameOfLifeGridInView` | `next/dynamic(..., { ssr: false })` requiere Client Component; `whileInView` requiere IntersectionObserver |
+| `GameOfLife` | Estado (grid, generacion, controles), `canvas.getContext('2d')`, `setInterval` — todo requiere DOM |
 
 ## Principio clave
 

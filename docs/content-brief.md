@@ -20,7 +20,7 @@
 | # | Decision | Resultado |
 |---|---|---|
 | 1 | Framer Motion (`motion/react`) | SI, solo en client components especificos |
-| 2 | Conway's Game of Life | SI, version sencilla en M3. Version avanzada como tarea futura (#21) |
+| 2 | Conway's Game of Life | SI. **Resuelto en `008-game-of-life`**: se implemento directamente la version completa (presets, velocidad, tamano de celda, contadores) — el Figma export ya la traia coded, asi que se ship de una vez en vez de la version sencilla + tarea #21 separada |
 | 3 | Geometrias SVG de fondo | SI (FibonacciSpiral, SpiralPetals, MetatronCube, GeometricDots, FlowerOfLife) |
 | 4 | Card EMAIL en Contact | Opcion A: sustituir mailto por CTA "WRITE A MESSAGE" que scrollea al form |
 | 5 | Foto de perfil | Placeholder SVG geometrico actual hasta que se proporcione foto real |
@@ -120,7 +120,7 @@
 - Titulo: `CONWAY'S GAME OF LIFE`
 - Subtitulo: `A zero-player game that demonstrates emergent complexity from simple rules. Watch patterns evolve, create your own, or explore classic configurations.`
 - **Version M3 (sencilla)**: grid 2D click-to-toggle + play/pause/reset + step automatico
-- **Version futura** (tarea #21): patrones predefinidos, control velocidad, contador generaciones, fullscreen, WebWorker
+- **Version futura** (tarea #21): patrones predefinidos, control velocidad, contador generaciones — **resuelto en `008-game-of-life`** (fullscreen y WebWorker siguen sin hacer, no bloqueantes)
 
 ### 8. Contact
 

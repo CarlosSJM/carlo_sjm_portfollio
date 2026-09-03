@@ -33,6 +33,7 @@ tests/
 - **Datos de `src/data/`**: integridad — no broken links, campos requeridos, types validos
 - **Tipos**: assertions de tipo cuando sean criticos
 - **Componentes sincronos** que renderizan datos estaticos (Skills, ProjectCard)
+- **Logica pura extraida de componentes con canvas/DOM no soportado por jsdom**: jsdom no implementa `canvas.getContext('2d')` (no hay paquete `canvas` instalado, por Minimal Dependencies). Patron establecido en `008-game-of-life`: las reglas/calculos (`src/lib/gameOfLife.ts`) se extraen a un modulo puro sin dependencias de React/canvas, 100% testeable en Vitest; el dibujado en canvas se verifica en Playwright (navegador real) en su lugar. Reutilizar este patron para cualquier feature futura basada en canvas.
 
 ### Vitest integracion (`tests/integration/`)
 
